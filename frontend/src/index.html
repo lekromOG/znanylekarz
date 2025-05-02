@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Znany Lekarz</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo"><img src="../img/gooddoctor.png" alt="gooddoctor" class="logo"></div>
+            <button class="phone-menu-toggle" id="burger-menu">☰</button>
+            <ul class="nav-links">
+                <li><a href="">Home</a></li>
+                <li><a href="">Appointments</a></li>
+                <li><a href="">Profile</a></li>
+                <li><a href="">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero-section">
+            <div class="search-tool">
+                <h1>Find your doctor and book an appointment</h1>
+                <h2>Search x available doctors</h2>
+                <div class="search-form">
+                    <div class="search-container">
+                        <button class="location-button button-active" id="in-person"">
+                            <i class="bi bi-hospital"></i> In Person
+                        </button>
+                        <button class="location-button" id="online">
+                            <i class="bi bi-house"></i> Online
+                        </button>
+                    </div>
+                    <div class="search-container">
+                        <input type="text" class="search-field" placeholder="Search by doctor or specialty" list="specialty-options">
+                        <datalist id="specialty-options">
+                            <option value="Family Medicine"></option>
+                            <option value="Internal Medicine"></option>
+                            <option value="Pediatrics"></option>
+                            <option value="Obstetrics and Gynecology"></option>
+                            <option value="Dermatology"></option>
+                            <option value="Psychiatry"></option>
+                            <option value="Neurology"></option>
+                            <option value="Cardiology"></option>
+                            <option value="Gastroenterology"></option>
+                            <option value="Orthopedics"></option>
+                            <option value="Pulmonology"></option>
+                            <option value="Nephrology"></option>
+                            <option value="Endocrinology"></option>
+                            <option value="Rheumatology"></option>
+                            <option value="Hematology"></option>
+                            <option value="Oncology"></option>
+                            <option value="Urology"></option>
+                            <option value="Ophthalmology"></option>
+                            <option value="Otolaryngology (ENT)"></option>
+                            <option value="General Surgery"></option>
+                            <option value="Plastic Surgery"></option>
+                            <option value="Anesthesiology"></option>
+                            <option value="Emergency Medicine"></option>
+                            <option value="Radiology"></option>
+                            <option value="Pathology"></option>
+                            <option value="Allergy and Immunology"></option>
+                            <option value="Infectious Disease"></option>
+                            <option value="Geriatrics"></option>
+                            <option value="Pain Management"></option>
+                            <option value="Sports Medicine"></option>
+                        </datalist>
+                        <input type="text" class="search-field" placeholder="Search by location" list="voivodeships-options" id="voivodeships">
+                        <datalist id="voivodeships-options">
+                            <option value="Dolnośląskie"></option>
+                            <option value="Kujawsko-Pomorskie"></option>
+                            <option value="Lubelskie"></option>
+                            <option value="Lubuskie"></option>
+                            <option value="Łódzkie"></option>
+                            <option value="Małopolskie"></option>
+                            <option value="Mazowieckie"></option>
+                            <option value="Opolskie"></option>
+                            <option value="Podkarpackie"></option>
+                            <option value="Podlaskie"></option>
+                            <option value="Pomorskie"></option>
+                            <option value="Śląskie"></option>
+                            <option value="Świętokrzyskie"></option>
+                            <option value="Warmińsko-Mazurskie"></option>
+                            <option value="Wielkopolskie"></option>
+                            <option value="Zachodniopomorskie"></option>
+                        </datalist>
+                        <input type="date" class="search-field" placeholder="Search by date">
+                        <button class="search-button">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer></footer>
+    <script src="script.js"></script>
+</body>
+</html>

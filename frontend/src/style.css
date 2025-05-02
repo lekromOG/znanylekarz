@@ -1,0 +1,254 @@
+@import 'reset.css'; 
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    font-family: Roboto, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 24px;
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+.subtitle {
+    font-size: 16px;
+}
+
+body, p {
+    font-size: 14px;
+}
+
+.small-text {
+    font-size: 12px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #7CC8A1;
+    color: white;
+}
+
+.nav-links {
+    display: none;
+}
+
+.logo {
+    width: 100px;
+    height: auto;
+}
+
+.phone-menu-toggle {
+    border: none;
+    background: none;
+    color: white;
+    font-size: 28px;
+}
+
+.phone-nav-active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    flex-direction: column;
+    position: fixed;
+    top: 60px; 
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px);
+    background-color: #7CC8A1;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.search-tool {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../img/8adb2403-8d26-4971-9fd4-6c7b5e44535a.png');
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+    color: white;
+    padding: 20px;
+    gap: 20px;
+    overflow: hidden; /* Ensure the pseudo-element stays within bounds */
+}
+
+.search-tool::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Adjust the color and opacity */
+    z-index: 1;
+}
+
+.search-tool > * {
+    position: relative;
+    z-index: 2; /* Ensure content stays above the overlay */
+}
+
+.location-button {
+    background: none;
+    border: 2px solid white;
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50px;
+}
+
+.search-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.search-field {
+    border-radius: 5px;
+    border: none;
+}
+
+.search-button {
+    border: none;
+    background-color: #7CC8A1;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50px;
+}
+
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.hero-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #7CC8A1;
+    overflow: hidden; /* Ensure the pseudo-element stays within bounds */
+}
+
+.button-active {
+    background-color: rgb(83, 181, 241);
+}
+
+  /* Tablet */
+@media (min-width: 481px) {
+    h1 {
+        font-size: 32px;
+    }
+
+    h2 {
+        font-size: 28px;
+    }
+
+    h3 {
+        font-size: 22px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+
+    body, p {
+        font-size: 16px;
+    }
+
+    .small-text {
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 750px){
+    .search-tool::before {
+        content: none;
+    }
+}
+  
+  /* Desktop */
+@media (min-width: 769px) {
+
+    h1 {
+        font-size: 40px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+    }
+
+    body, p {
+        font-size: 18px;
+    }
+
+    .small-text {
+        font-size: 14px;
+    }
+
+    .phone-menu-toggle {
+        display: none;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+    }
+
+    .logo {
+        width: 150px;
+    }
+    
+    .navbar {
+        padding-right: 50px;
+    }
+
+    .hero-section {
+        padding-top: 50px;
+    }
+}
+  
