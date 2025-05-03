@@ -1,3 +1,1 @@
-npm install mongoose
-
-npm install bcrypt jsonwebtoken
+N/A
