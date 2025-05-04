@@ -1,0 +1,24 @@
+.form-toggle {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-toggle button {
+    padding: 10px 20px;
+    margin: 0 5px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.form-toggle button.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Hide forms */
+.hidden {
+    display: none;
+}

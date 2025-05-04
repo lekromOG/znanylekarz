@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose'); 
+const bcrypt = require('bcrypt');
 const app = express();
 const PORT = 3000;
 
@@ -34,19 +35,18 @@ app.get('/api/doctors', async (req, res) => {
 
 app.get('/api/users', async (req, res) => {
     try {
-        const users = await users.findOne({ email: 'example@example.com' }); 
-        if (!users) {
-            return res.status(404).json({ error: 'users not found' });
+        const allUsers = await users.find(); 
+        if (!allUsers || allUsers.length === 0) {
+            return res.status(404).json({ error: 'No users found' });
         }
-        res.json(users);
+        res.json(allUsers);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch users information' });
+        res.status(500).json({ error: 'Failed to fetch users' });
     }
 });
 
 app.post('/api/register', async (req, res) => {
     try {
-        console.log('Register endpoint hit:', req.body); 
         const { name, lastname, email, password, role } = req.body;
 
         const existingUser = await users.findOne({ email });
@@ -54,12 +54,13 @@ app.post('/api/register', async (req, res) => {
             return res.status(400).json({ error: 'User already exists' });
         }
 
-        const newUser = new users({ name, lastname, email, password, role: role || 'standard' });
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = new users({ name, lastname, email, password: hashedPassword, role: role || 'standard' });
         const savedUser = await newUser.save();
 
         res.status(201).json(savedUser);
     } catch (err) {
-        console.error('Error in /api/register:', err); 
         res.status(500).json({ error: 'Failed to register user' });
     }
 });
