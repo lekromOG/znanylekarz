@@ -1,23 +1,46 @@
 const loginForm = document.getElementById('login-form');
 const registerForm = document.getElementById('register-form');
-const showLoginButton = document.getElementById('show-login');
-const showRegisterButton = document.getElementById('show-register');
+const toggleFormButton = document.getElementById('toggle-form');
 const message = document.getElementById('message');
 
-showRegisterButton.addEventListener('click', () => {
-    registerForm.classList.remove('hidden'); 
-    loginForm.classList.add('hidden'); 
-    showRegisterButton.classList.add('active');
-    showLoginButton.classList.remove('active');
+const customSelect = document.querySelector('.custom-select');
+const selected = customSelect.querySelector('.selected');
+const optionsContainer = customSelect.querySelector('.options');
+const options = customSelect.querySelectorAll('.option');
+const hiddenInput = document.getElementById('role');
+
+selected.addEventListener('click', (e) => {
+    e.stopPropagation(); // Prevent the click from propagating to the document
+    optionsContainer.classList.toggle('hidden');
 });
 
-showLoginButton.addEventListener('click', () => {
-    loginForm.classList.remove('hidden');
-    registerForm.classList.add('hidden'); 
-    showLoginButton.classList.add('active');
-    showRegisterButton.classList.remove('active');
+// Handle option selection
+options.forEach(option => {
+    option.addEventListener('click', () => {
+        selected.textContent = option.textContent;
+        hiddenInput.value = option.dataset.value; // Set the hidden input value
+        optionsContainer.classList.add('hidden'); // Hide the dropdown
+    });
 });
 
+// Close the dropdown when clicking outside of it
+document.addEventListener('click', (e) => {
+    if (!customSelect.contains(e.target)) {
+        optionsContainer.classList.add('hidden'); // Hide the dropdown
+    }
+});
+
+toggleFormButton.addEventListener('click', () => {
+    if (loginForm.classList.contains('hidden')) {
+        loginForm.classList.remove('hidden');
+        registerForm.classList.add('hidden');
+        toggleFormButton.textContent = 'Sign Up'; 
+    } else {
+        loginForm.classList.add('hidden');
+        registerForm.classList.remove('hidden');
+        toggleFormButton.textContent = 'Sign In';
+    }
+});
 
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -35,15 +58,18 @@ loginForm.addEventListener('submit', async (e) => {
         if (response.ok) {
             const { token } = await response.json();
             localStorage.setItem('token', token); 
+            message.style.display = 'block';
             message.textContent = 'Login successful!';
             message.style.color = 'green';
-            window.location.href = 'index.html';
+            window.location.href = 'index.html'; 
         } else {
             const error = await response.json();
+            message.style.display = 'block';
             message.textContent = error.error || 'Login failed';
             message.style.color = 'red';
         }
     } catch (err) {
+        message.style.display = 'block';
         message.textContent = 'An error occurred';
         message.style.color = 'red';
         console.error('Error:', err);
@@ -57,7 +83,14 @@ registerForm.addEventListener('submit', async (e) => {
     const lastname = document.getElementById('lastname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    const role = document.getElementById('role').value;
+    const role = hiddenInput.value; 
+
+    if (!role) {
+        message.style.display = 'block';
+        message.textContent = 'Please select a role.';
+        message.style.color = 'red';
+        return;
+    }
 
     try {
         const response = await fetch('http://localhost:3000/api/register', {
@@ -68,15 +101,18 @@ registerForm.addEventListener('submit', async (e) => {
 
         if (response.ok) {
             const data = await response.json();
+            message.style.display = 'block';
             message.textContent = 'Registration successful!';
             message.style.color = 'green';
             console.log('Registered user:', data);
         } else {
             const error = await response.json();
+            message.style.display = 'block';
             message.textContent = error.error || 'Registration failed';
             message.style.color = 'red';
         }
     } catch (err) {
+        message.style.display = 'block';
         message.textContent = 'An error occurred';
         message.style.color = 'red';
         console.error('Error:', err);
