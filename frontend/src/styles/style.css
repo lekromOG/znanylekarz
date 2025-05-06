@@ -35,6 +35,14 @@ h3 {
     font-size: 18px;
 }
 
+input {
+    padding: 5px;
+}
+
+input:focus {
+    outline: none;
+}
+
 .subtitle {
     font-size: 16px;
 }
@@ -52,7 +60,7 @@ body, p {
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #7CC8A1;
+    background-color: #5AAF9C;
     color: white;
 }
 
@@ -83,7 +91,7 @@ body, p {
     left: 0;
     width: 100%;
     height: calc(100% - 60px);
-    background-color: #7CC8A1;
+    background-color: #5AAF9C;
     z-index: 1000;
     overflow-y: auto;
 }
@@ -143,7 +151,7 @@ body, p {
 
 .search-button {
     border: none;
-    background-color: #7CC8A1;
+    background-color: #2F4858;
     color: white;
     padding: 5px 10px;
     border-radius: 50px;
@@ -161,12 +169,32 @@ body, p {
     justify-content: center;
     align-items: center;
     width: 100%;
-    background-color: #7CC8A1;
+    background-color: #5AAF9C;
     overflow: hidden;
 }
 
 .button-active {
-    background-color: rgb(83, 181, 241);
+    background-color: #367A84;
+}
+
+.filler-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    padding: 20px;
+}
+
+.filler-section-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    gap: 20px;
+    justify-content: space-evenly;
+    background-color: rgb(245, 243, 243);
+    border-radius: 10px;
 }
 
   /* Tablet */
@@ -249,6 +277,10 @@ body, p {
 
     .hero-section {
         padding-top: 50px;
+    }
+
+    .filler-section-container{
+        width: 75%;
     }
 }
   
