@@ -62,7 +62,7 @@ loginForm.addEventListener('submit', async (e) => {
             message.textContent = 'Login successful!';
             message.style.color = 'green'; 
 
-            window.location.href = 'http://localhost:3000/search.html';
+            window.location.href = 'http://localhost:3000/index.html';
         } else {
             const error = await response.json();
             message.style.display = 'block';
