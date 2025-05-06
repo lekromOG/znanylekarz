@@ -71,7 +71,7 @@ input:focus {
 
 .form-container {
     height: 100vh;
-    width: 50%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -81,7 +81,7 @@ input:focus {
 
 .side-pane {
     height: 100vh;
-    width: 50%;
+    width: 40%;
     background-image: url('../img/sidepane.png');
     background-position: center;
     background-color: #DBF9DE;
