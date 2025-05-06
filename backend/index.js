@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const app = express();
 const PORT = 3000;
 
-
-const MONGO_URI = 'mongodb+srv://studia:studiaDBaccessPK2025TIP1@studia.ykishkc.mongodb.net/znanylekarz?retryWrites=true&w=majority';
+// const MONGO_URI = 'mongodb+srv://studia:studiaDBaccessPK2025TIP1@studia.ykishkc.mongodb.net/znanylekarz?retryWrites=true&w=majority';
+const MONGO_URI = "mongodb+srv://krzysio:krzysio1@cluster0.itstbt5.mongodb.net/";
 
 // MongoDB
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -22,6 +22,7 @@ app.use('/img', express.static(path.join(__dirname, '../frontend/img')));
 
 const Doctor = require('../db/doctor.js'); 
 const users = require('../db/users.js');
+const { error } = require('console');
 
 // przykładowy endpoint do pobierania lekarzy
 app.get('/api/doctors', async (req, res) => {
@@ -62,6 +63,29 @@ app.post('/api/register', async (req, res) => {
         res.status(201).json(savedUser);
     } catch (err) {
         res.status(500).json({ error: 'Failed to register user' });
+    }
+});
+
+app.post('/api/login', async (req, res) => {
+    try {
+        
+        const { name, lastname, email, password, role } = req.body;
+        const user = await users.findOne({ email });
+
+        if (user) {
+            const isPasswordOk = await bcrypt.compare(password, user.password);
+            console.log(password);
+
+            if (isPasswordOk) {
+                console.log(":)");
+                return res.status(200);
+            }
+        }
+
+        return res.status(400).json({ error: "Invalid credentials" });
+
+    } catch (err) {
+        res.status(500).json({ error: "Internal server error." })
     }
 });
 
