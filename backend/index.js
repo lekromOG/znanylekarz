@@ -5,8 +5,8 @@ const bcrypt = require('bcrypt');
 const app = express();
 const PORT = 3000;
 
-// const MONGO_URI = 'mongodb+srv://studia:studiaDBaccessPK2025TIP1@studia.ykishkc.mongodb.net/znanylekarz?retryWrites=true&w=majority';
-const MONGO_URI = "mongodb+srv://krzysio:krzysio1@cluster0.itstbt5.mongodb.net/";
+const MONGO_URI = 'mongodb+srv://studia:studiaDBaccessPK2025TIP1@studia.ykishkc.mongodb.net/znanylekarz?retryWrites=true&w=majority';
+// const MONGO_URI = "mongodb+srv://krzysio:krzysio1@cluster0.itstbt5.mongodb.net/";
 
 // MongoDB
 mongoose.connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
@@ -77,8 +77,7 @@ app.post('/api/login', async (req, res) => {
             console.log(password);
 
             if (isPasswordOk) {
-                console.log(":)");
-                return res.status(200);
+                return res.status(200).json({ message: 'Login successful', user });
             }
         }
 

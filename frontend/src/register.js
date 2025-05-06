@@ -54,14 +54,15 @@ loginForm.addEventListener('submit', async (e) => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         });
-
+        
         if (response.ok) {
             const { token } = await response.json();
             localStorage.setItem('token', token); 
             message.style.display = 'block';
             message.textContent = 'Login successful!';
-            message.style.color = 'green';
-            window.location.href = 'index.html'; 
+            message.style.color = 'green'; 
+
+            window.location.href = 'http://localhost:3000/search.html';
         } else {
             const error = await response.json();
             message.style.display = 'block';
