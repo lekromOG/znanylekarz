@@ -119,5 +119,3 @@ registerForm.addEventListener('submit', async (e) => {
         console.error('Error:', err);
     }
 });
-
-
