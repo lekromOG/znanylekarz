@@ -27,6 +27,13 @@ onlineButton.addEventListener('click', () => {
     locationSearch.style.display = 'none';
 });
 
+fetch('http://localhost:3000/api/login/verify')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data); 
+    })
+    .catch(error => console.error('Error fetching doctors:', error));
+
 fetch('http://localhost:3000/api/doctors')
     .then(response => response.json())
     .then(data => {
