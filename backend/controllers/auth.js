@@ -26,7 +26,7 @@ const login = async (req, res) => {
         } res.status(401).json({ error: "Invalid credentials" });
     } catch (err) {
         console.log(err);
-        return res.status(500).json({ error: "Internal server error." });
+        return res.status(500).json({ error: "Internal server error" });
     }
 };
 
@@ -47,7 +47,17 @@ const register = async (req, res) => {
     }
 };
 
+const verify = async (req, res) => {
+    try {
+        const user = await users.findById(req.user_uuid);
+        return res.status(200).json({ role: `${user.role}` });
+    } catch (err) {
+        return res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 export {
     login,
-    register
+    register,
+    verify
 }
