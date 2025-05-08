@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import users from '../../db/users.js';
+import * as fs from 'node:fs';
 
 const login = async (req, res) => {
     try {
@@ -11,7 +12,8 @@ const login = async (req, res) => {
             const isPasswordOk = await bcrypt.compare(password, user.password);
             if (isPasswordOk) {
                 try {
-                    var token = jwt.sign({sub: user._id }, 'privateKey', { algorithm: 'HS256', expiresIn: "1h"});
+                    var privateKey = fs.readFileSync('keys/privkey.pem', 'utf8');
+                    var token = jwt.sign({sub: user._id }, privateKey, { algorithm: 'RS256', expiresIn: "1h"});
                     res.set('Authorization', `Bearer ${token}`);
                     return res
                             .status(200)
@@ -23,7 +25,7 @@ const login = async (req, res) => {
                             .json({ error: "JWT Token error"});
                 }
             }
-        } res.status(401).json({ error: "Invalid credentials" });
+        } return res.status(401).json({ error: "Invalid credentials" });
     } catch (err) {
         console.log(err);
         return res.status(500).json({ error: "Internal server error" });
