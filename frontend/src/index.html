@@ -35,58 +35,52 @@
                         </button>
                     </div>
                     <div class="search-container">
-                        <input type="text" class="search-field" placeholder="Search by doctor or specialty" list="specialty-options">
-                        <datalist id="specialty-options">
-                            <option value="Family Medicine"></option>
-                            <option value="Internal Medicine"></option>
-                            <option value="Pediatrics"></option>
-                            <option value="Obstetrics and Gynecology"></option>
-                            <option value="Dermatology"></option>
-                            <option value="Psychiatry"></option>
-                            <option value="Neurology"></option>
-                            <option value="Cardiology"></option>
-                            <option value="Gastroenterology"></option>
-                            <option value="Orthopedics"></option>
-                            <option value="Pulmonology"></option>
-                            <option value="Nephrology"></option>
-                            <option value="Endocrinology"></option>
-                            <option value="Rheumatology"></option>
-                            <option value="Hematology"></option>
-                            <option value="Oncology"></option>
-                            <option value="Urology"></option>
-                            <option value="Ophthalmology"></option>
-                            <option value="Otolaryngology (ENT)"></option>
-                            <option value="General Surgery"></option>
-                            <option value="Plastic Surgery"></option>
-                            <option value="Anesthesiology"></option>
-                            <option value="Emergency Medicine"></option>
-                            <option value="Radiology"></option>
-                            <option value="Pathology"></option>
-                            <option value="Allergy and Immunology"></option>
-                            <option value="Infectious Disease"></option>
-                            <option value="Geriatrics"></option>
-                            <option value="Pain Management"></option>
-                            <option value="Sports Medicine"></option>
-                        </datalist>
-                        <input type="text" class="search-field" placeholder="Search by location" list="voivodeships-options" id="voivodeships">
-                        <datalist id="voivodeships-options">
-                            <option value="Dolnośląskie"></option>
-                            <option value="Kujawsko-Pomorskie"></option>
-                            <option value="Lubelskie"></option>
-                            <option value="Lubuskie"></option>
-                            <option value="Łódzkie"></option>
-                            <option value="Małopolskie"></option>
-                            <option value="Mazowieckie"></option>
-                            <option value="Opolskie"></option>
-                            <option value="Podkarpackie"></option>
-                            <option value="Podlaskie"></option>
-                            <option value="Pomorskie"></option>
-                            <option value="Śląskie"></option>
-                            <option value="Świętokrzyskie"></option>
-                            <option value="Warmińsko-Mazurskie"></option>
-                            <option value="Wielkopolskie"></option>
-                            <option value="Zachodniopomorskie"></option>
-                        </datalist>
+                        <!-- Custom Dropdown -->
+                        <div class="custom-dropdown">
+                            <input type="text" class="dropdown-input" placeholder="Search doctor by specialty" id="dropdown-input">
+                            <ul class="dropdown-list" id="dropdown-list">
+                                <li class="dropdown-item">Family Medicine</li>
+                                <li class="dropdown-item">Internal Medicine</li>
+                                <li class="dropdown-item">Pediatrics</li>
+                                <li class="dropdown-item">Obstetrics and Gynecology</li>
+                                <li class="dropdown-item">Dermatology</li>
+                                <li class="dropdown-item">Psychiatry</li>
+                                <li class="dropdown-item">Neurology</li>
+                                <li class="dropdown-item">Cardiology</li>
+                                <li class="dropdown-item">Gastroenterology</li>
+                                <li class="dropdown-item">Orthopedics</li>
+                                <li class="dropdown-item">Pulmonology</li>
+                                <li class="dropdown-item">Nephrology</li>
+                                <li class="dropdown-item">Endocrinology</li>
+                                <li class="dropdown-item">Rheumatology</li>
+                                <li class="dropdown-item">Hematology</li>
+                                <li class="dropdown-item">Oncology</li>
+                                <li class="dropdown-item">Urology</li>
+                                <li class="dropdown-item">Ophthalmology</li>
+                                <li class="dropdown-item">Plastic Surgery</li>
+                            </ul>
+                        </div>
+                        <div class="custom-dropdown" id="voivodeship-dropdown">
+                            <input type="text" class="dropdown-input" placeholder="Search by location" id="dropdown-input">
+                            <ul class="dropdown-list" id="voivodeship-dropdown-list">
+                                <li class="dropdown-item">Dolnośląskie</li>
+                                <li class="dropdown-item">Kujawsko-Pomorskie</li>
+                                <li class="dropdown-item">Lubelskie</li>
+                                <li class="dropdown-item">Lubuskie</li>
+                                <li class="dropdown-item">Łódzkie</li>
+                                <li class="dropdown-item">Małopolskie</li>
+                                <li class="dropdown-item">Mazowieckie</li>
+                                <li class="dropdown-item">Opolskie</li>
+                                <li class="dropdown-item">Podkarpackie</li>
+                                <li class="dropdown-item">Podlaskie</li>
+                                <li class="dropdown-item">Pomorskie</li>
+                                <li class="dropdown-item">Śląskie</li>
+                                <li class="dropdown-item">Świętokrzyskie</li>
+                                <li class="dropdown-item">Warmińsko-Mazurskie</li>
+                                <li class="dropdown-item">Wielkopolskie</li>
+                                <li class="dropdown-item">Zachodniopomorskie</li>
+                            </ul>
+                        </div>
                         <input type="date" class="search-field" placeholder="Search by date">
                         <button class="search-button">
                             <i class="bi bi-search"></i> Search
