@@ -65,11 +65,13 @@ loginForm.addEventListener('submit', async (e) => {
             window.location.href = 'http://localhost:3000/index.html';
         } else {
             const error = await response.json();
+            localStorage.removeItem('token', token); 
             message.style.display = 'block';
             message.textContent = error.error || 'Login failed';
             message.style.color = 'red';
         }
     } catch (err) {
+        localStorage.removeItem('token', token); 
         message.style.display = 'block';
         message.textContent = 'An error occurred';
         message.style.color = 'red';

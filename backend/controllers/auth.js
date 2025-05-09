@@ -12,12 +12,12 @@ const login = async (req, res) => {
             const isPasswordOk = await bcrypt.compare(password, user.password);
             if (isPasswordOk) {
                 try {
-                    var privateKey = fs.readFileSync('keys/privkey.pem', 'utf8');
+                    var privateKey = fs.readFileSync('./backend/keys/privkey.pem', 'utf8');
                     var token = jwt.sign({sub: user._id }, privateKey, { algorithm: 'RS256', expiresIn: "1h"});
                     res.set('Authorization', `Bearer ${token}`);
                     return res
                             .status(200)
-                            .json({ message: 'Login successful', token: `Bearer: ${token}`});
+                            .json({ message: 'Login successful', token: `${token}`});
                 } catch (err) {
                     console.log(err);
                     return res

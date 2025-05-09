@@ -2,6 +2,17 @@ const burgerMenu = document.getElementById('burger-menu');
 const navLinks = document.querySelector('.nav-links');
 const searchButton = document.getElementById('search-button');
 
+function validateToken() {
+    var token = sessionStorage.getItem("token");
+
+    if (token == undefined || token == "") {
+        $("#infoZone").removeClass();
+        $("#infoZone").addClass("alert alert-warning");
+        $("#infoZone").text("Obtain a JWT token first :)");
+        return;
+    }
+}
+
 burgerMenu.addEventListener('click', () => {
     navLinks.classList.toggle('phone-nav-active');
 });
@@ -82,14 +93,32 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     });
+
+    var token = localStorage.getItem('token');
+    console.log('Token:', token);
+
+    fetch('http://localhost:3000/api/login', {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json", // Ensure this includes "Bearer"
+            'Authorization': "Bearer " + token,
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to fetch role');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('User role:', data.role);
+        })
+        .catch(error => console.error('Error fetching role:', error));
 });
 
-fetch('http://localhost:3000/api/login/verify')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data); 
-    })
-    .catch(error => console.error('Error fetching doctors:', error));
+
+
+
 
 fetch('http://localhost:3000/api/doctors')
     .then(response => response.json())
