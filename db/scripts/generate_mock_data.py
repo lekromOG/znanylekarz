@@ -16,15 +16,15 @@ def gen_user():
 
     user = Person(Locale.PL)
     full_name = user.full_name(gender=random.choice(genders))
-    email = user.email(["krzysie", "lekarz", "gooddoctor", "ziebabrothers", "cudnatury", "cudboga", "illuminati"])
+    email = user.email(["krzysio", "lekarz", "gooddoctor", "ziebabrothers", "cudnatury", "cudboga", "illuminati"]) + ".pl"
     first_name = full_name.split(" ")[0]
     last_name = full_name.split(" ")[1]
 
-    return {"": first_name, "": last_name, "": email}
+    return {"name": first_name, "lastname": last_name, "email": email}
 
 def gen_data(count):
     users_generated = []
-    for _ in range(count):
+    for _ in range(int(count)):
         users_generated.append(gen_user())
     return users_generated
 
@@ -60,8 +60,8 @@ def main():
 
     data = gen_data(count)
 
-    for d in data:
-        pass
+    print(data)
+    collection.insert_many(data)
 
 if __name__ == "__main__":
     main()
