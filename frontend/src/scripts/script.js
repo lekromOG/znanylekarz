@@ -43,6 +43,19 @@ onlineButton.addEventListener('click', () => {
     locationSearch.style.display = 'none';
 });
 
+searchButton.addEventListener('click', () => {
+    const specialtyInput = document.querySelector('#dropdown-input').value.trim();
+    const locationInput = document.querySelector('#voivodeship-dropdown .dropdown-input').value.trim();
+    const dateInput = document.querySelector('.search-field').value.trim();
+
+    const params = new URLSearchParams();
+    if (specialtyInput) params.append('specialty', specialtyInput);
+    if (locationInput) params.append('location', locationInput);
+    if (dateInput) params.append('date', dateInput);
+
+    window.location.href = `search.html?${params.toString()}`;
+});
+
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
 
