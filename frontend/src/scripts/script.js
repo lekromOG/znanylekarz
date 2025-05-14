@@ -40,12 +40,15 @@ searchButton.addEventListener('click', () => {
 
     const params = new URLSearchParams();
     if (specialtyInput) params.append('specialty', specialtyInput);
-    if (locationInput) params.append('location', locationInput);
+
+    if (locationSearch.style.display !== 'none' && locationInput) {
+        params.append('location', locationInput);
+    }
+
     if (dateInput) params.append('date', dateInput);
 
     window.location.href = `search.html?${params.toString()}`;
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
 
