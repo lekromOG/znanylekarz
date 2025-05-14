@@ -41,9 +41,16 @@ searchButton.addEventListener('click', () => {
     const params = new URLSearchParams();
     if (specialtyInput) params.append('specialty', specialtyInput);
 
-    if (locationSearch.style.display !== 'none' && locationInput) {
-        params.append('location', locationInput);
+    let appointmentType = '';
+    if (onlineButton.classList.contains('button-active')) {
+        appointmentType = 'online';
+    } else if (inPersonButton.classList.contains('button-active')) {
+        appointmentType = 'in-person';
+        if (locationInput) {
+            params.append('location', locationInput);
+        }
     }
+    if (appointmentType) params.append('appointmentType', appointmentType);
 
     if (dateInput) params.append('date', dateInput);
 

@@ -22,11 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const specialty = params.get('specialty');
         const location = params.get('location');
         const date = params.get('date');
+        const appointmentType = params.get('appointmentType');
 
         const apiParams = [];
         if (specialty) apiParams.push(`specialty=${encodeURIComponent(specialty)}`);
         if (location) apiParams.push(`location=${encodeURIComponent(location)}`);
         if (date) apiParams.push(`date=${encodeURIComponent(date)}`);
+        if (appointmentType) apiParams.push(`appointmentType=${encodeURIComponent(appointmentType)}`);
         const apiQuery = apiParams.length ? `?${apiParams.join('&')}` : '';
 
         console.log('API Query:', apiQuery);
