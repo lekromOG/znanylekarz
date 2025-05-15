@@ -34,23 +34,23 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('API Query:', apiQuery);
         console.log('api params:', apiParams);
 
-        fetch(`/api/doctors${apiQuery}`)
-            .then(response => response.json())
-            .then(data => {
-                const resultsDiv = document.createElement('div');
-                resultsDiv.className = 'doctor-results';
-                data.forEach(doctor => {
-                    const doctorDiv = document.createElement('div');
-                    doctorDiv.className = 'doctor-card';
-                    doctorDiv.innerHTML = ``; // Once db structure is known, relevant information will be added here 
-                    resultsDiv.appendChild(doctorDiv);
-                });
-                searchFilter.innerHTML = '';
-                searchFilter.appendChild(resultsDiv);
-            })
-            .catch(error => {
-                searchFilter.innerHTML = '<p>Error loading doctor data.</p>';
-            });
+    //     fetch(`/api/doctors${apiQuery}`)
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             const resultsDiv = document.createElement('div');
+    //             resultsDiv.className = 'doctor-results';
+    //             data.forEach(doctor => {
+    //                 const doctorDiv = document.createElement('div');
+    //                 doctorDiv.className = 'doctor-card';
+    //                 doctorDiv.innerHTML = ``; // Once db structure is known, relevant information will be added here 
+    //                 resultsDiv.appendChild(doctorDiv);
+    //             });
+    //             searchFilter.innerHTML = '';
+    //             searchFilter.appendChild(resultsDiv);
+    //         })
+    //         .catch(error => {
+    //             searchFilter.innerHTML = '<p>Error loading doctor data.</p>';
+    //         });
     }
 });
 
