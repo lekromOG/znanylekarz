@@ -216,6 +216,11 @@ body, p {
     overflow: visible;;
 }
 
+.advice-review-container {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
 
   /* Tablet */
 @media (min-width: 481px) {
@@ -318,6 +323,15 @@ body, p {
 
     .search-form {
         min-width: 750px;
+    }
+
+    .advice-review-section {
+        flex-direction: row;
+        gap: 0px;
+    }
+
+    .advice-review-container {
+        width: 100%;
     }
 }
   
