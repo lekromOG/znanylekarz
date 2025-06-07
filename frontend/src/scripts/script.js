@@ -99,7 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     var token = localStorage.getItem('token');
-    console.log('Token:', token);
 
     fetch('http://localhost:3000/api/login', {
         method: 'GET',

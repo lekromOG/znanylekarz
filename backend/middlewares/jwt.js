@@ -5,7 +5,7 @@ const authenticateToken = async (req, res, next) => {
     try {
         const authorization = req.get('Authorization');
         const token = authorization.split(' ')[1]; 
-        console.log(token); // Log the token for debugging
+
         if (token != null) {
             var publicKey = fs.readFileSync('./backend/keys/pubkey.pem', 'utf8');
             jwt.verify(token, publicKey, (err, user) => {
