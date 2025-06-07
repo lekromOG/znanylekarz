@@ -1,1 +1,23 @@
-@import url('../styles/reset.css');
+@import '../styles/reset.css';
+@import '../styles/shared.css';
+
+.results {
+    height: 90vh;
+}
+
+.search-filter {
+    width: 100%;
+    background-color: red;
+    padding: 20px;
+}
+
+.search-results {
+    width: 100%;
+    background-color: green;
+}
+
+.filter-options {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}

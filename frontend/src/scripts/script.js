@@ -3,20 +3,6 @@ const navLinks = document.querySelector('.nav-links');
 const searchButton = document.getElementById('search-button');
 const navigation = document.getElementById('nav-links');
 
-function createNavLinks(links, container) {
-    links.forEach(linkData => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-
-        a.href = linkData.href;
-        a.textContent = linkData.text;
-        a.target = "_blank";
-
-        li.appendChild(a);
-        container.appendChild(li);
-    });
-}
-
 burgerMenu.addEventListener('click', () => {
     navLinks.classList.toggle('phone-nav-active');
 });
@@ -47,6 +33,29 @@ onlineButton.addEventListener('click', () => {
     locationSearch.style.display = 'none';
 });
 
+searchButton.addEventListener('click', () => {
+    const specialtyInput = document.querySelector('#dropdown-input').value.trim();
+    const locationInput = document.querySelector('#voivodeship-dropdown .dropdown-input').value.trim();
+    const dateInput = document.querySelector('.search-field').value.trim();
+
+    const params = new URLSearchParams();
+    if (specialtyInput) params.append('specialty', specialtyInput);
+
+    let appointmentType = '';
+    if (onlineButton.classList.contains('button-active')) {
+        appointmentType = 'online';
+    } else if (inPersonButton.classList.contains('button-active')) {
+        appointmentType = 'in-person';
+        if (locationInput) {
+            params.append('location', locationInput);
+        }
+    }
+    if (appointmentType) params.append('appointmentType', appointmentType);
+
+    if (dateInput) params.append('date', dateInput);
+
+    window.location.href = `search.html?${params.toString()}`;
+});
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
 
@@ -98,74 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    var token = localStorage.getItem('token');
-
-    fetch('http://localhost:3000/api/login', {
-        method: 'GET',
-        headers: {
-            "Content-Type": "application/json",
-            'Authorization': "Bearer " + token,
-        }
-    })
-        .then(response => {
-            if (!response.ok) {
-                const links = [
-                    { href: "index.html", text: "Home" },
-                    { href: "register.html", text: "Sign in" }
-                ];
-
-                createNavLinks(links, navigation);
-                throw new Error('Failed to fetch role');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log('User role:', data.role);
-            if(data.role == "doctor"){
-
-                const links = [
-                    { href: "index.html", text: "Home" },
-                    { href: "appointments", text: "Appointments"},
-                    { href: "doctor.html", text: "My Profile" },
-                    { href: "logout", text: "Logout" }
-                ];
-
-                createNavLinks(links, navigation);
-
-            } else if (data.role == "standard"){
-                console.log("standardUser")
-
-                const links = [
-                    { href: "index.html", text: "Home" },
-                    { href: "appointments", text: "Appointments"},
-                    { href: "doctor.html", text: "My Profile" },
-                    { href: "logout", text: "Logout" }
-                ];
-
-                createNavLinks(links, navigation);
-            } else if (data.role == "admin"){
-                console.log("adminUser")
-
-                const links = [
-                    { href: "index.html", text: "Home" },
-                    { href: "Admin", text: "Admin"},
-                    { href: "logout", text: "Logout" }
-                ];
-
-                createNavLinks(links, navigation);
-            }else{
-                const links = [
-                    { href: "index.html", text: "Home" },
-                    { href: "register.html", text: "Sign in" }
-                ];
-
-                createNavLinks(links, navigation);
-            }
-        })
-        .catch(error => console.error('Error fetching role:', error));
+    fetchAndSetNav(navigation);
 });
-
-
 
 
 
