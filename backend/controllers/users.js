@@ -20,6 +20,31 @@ const deleteUser = async (req, res) => {
     }
 };
 
+const getMyUserProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user_uuid);
+        if (!user) return res.status(404).json({ error: 'User not found' });
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to fetch user profile' });
+    }
+};
+
+const updateMyUserProfile = async (req, res) => {
+    try {
+        const { name, lastname } = req.body;
+        const user = await User.findByIdAndUpdate(
+            req.user_uuid,
+            { name, lastname },
+            { new: true }
+        );
+        if (!user) return res.status(404).json({ error: 'User not found' });
+        res.json(user);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to update user profile' });
+    }
+};
+
 export {
-    getUsers, deleteUser
+    getUsers, deleteUser, updateMyUserProfile, getMyUserProfile
 }

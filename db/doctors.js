@@ -9,6 +9,7 @@ const doctorSchema = new Schema({
     location: { type: String, required: false, default: '' },
     available: { type: Boolean, default: true },
     rating: { type: Number, default: 0 },
+    availableDays: [{ type: String }],
     opinions: [{
         user_id: { type: ObjectId, ref: 'users', required: true },
         rating: { type: Number, required: true },

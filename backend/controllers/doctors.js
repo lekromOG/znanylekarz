@@ -1,4 +1,5 @@
 import Doctor from '../../db/doctors.js';
+import Appointment from '../../db/appointments.js';
 
 const getDoctors = async (req, res) => {
     try {
@@ -58,6 +59,37 @@ const getDoctorsByParameters = async (req, res) => {
     }
 }
 
+function generateSlots() {
+    const slots = [];
+    for (let h = 9; h < 17; h++) {
+        slots.push(`${h.toString().padStart(2, '0')}:00`);
+        slots.push(`${h.toString().padStart(2, '0')}:30`);
+    }
+    return slots;
+}
+
+const getDoctorSlots = async (req, res) => {
+    const doctorId = req.params.id;
+    const date = req.query.date;
+    if (!date) return res.status(400).json({ error: 'Date is required' });
+
+    const doctor = await Doctor.findById(doctorId);
+    if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
+
+    if (!doctor.availableDays.includes(date)) {
+        return res.json([]); // Not available that day
+    }
+
+    const appointments = await Appointment.find({ doctorId, date });
+    const bookedTimes = appointments.map(a => a.time);
+
+    const allSlots = generateSlots();
+    const availableSlots = allSlots.filter(slot => !bookedTimes.includes(slot));
+
+    res.json(availableSlots);
+};
+
+
 export {
-    getDoctors, deleteDoctor, getMyDoctorProfile, updateMyDoctorProfile
+    getDoctors, deleteDoctor, getMyDoctorProfile, updateMyDoctorProfile, getDoctorsByParameters, getDoctorSlots
 }

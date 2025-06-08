@@ -43,7 +43,7 @@ function fetchAndSetNav(navigation) {
             links = [
                 { href: "index.html", text: "Home" },
                 { href: "appointments", text: "Appointments"},
-                { href: "doctor.html", text: "My Profile" },
+                { href: "user.html", text: "My Profile" },
                 { href: "logout", text: "Logout" }
             ];
         } else if (data.role === "admin") {

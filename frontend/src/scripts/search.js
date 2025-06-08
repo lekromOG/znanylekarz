@@ -31,6 +31,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (appointmentType) apiParams.push(`appointmentType=${encodeURIComponent(appointmentType)}`);
         const apiQuery = apiParams.length ? `?${apiParams.join('&')}` : '';
 
+
+
+    function bookAppointment(doctorId, date, time) {
+        fetch('/api/appointments', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + localStorage.getItem('token')
+            },
+            body: JSON.stringify({ doctorId, date, time })
+        })
+        .then(res => res.ok ? alert('Appointment booked!') : alert('Booking failed'));
+    }
+
         // Fetch doctors from API and display them
         fetch(`/api/doctors${apiQuery}`)
             .then(response => response.json())
@@ -60,6 +74,31 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${doctor.available ? '<span class="badge bg-success">Available</span>' : '<span class="badge bg-secondary">Unavailable</span>'}
                     `;
                     resultsDiv.appendChild(doctorDiv);
+
+                         // After creating doctorDiv and appending to resultsDiv:
+                    const slotsDiv = document.createElement('div');
+                    slotsDiv.className = 'slots';
+                    doctorDiv.appendChild(slotsDiv);
+
+                    // Assume you have a selectedDate variable from your search/filter UI
+                    fetch(`/api/doctors/${doctor._id}/slots?date=${date}`, {
+                        headers: {
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        }
+                    })
+                    .then(res => res.json())
+                    .then(slots => {
+                        if (slots.length === 0) {
+                            slotsDiv.textContent = 'No available slots for this day.';
+                        } else {
+                            slots.forEach(time => {
+                                const btn = document.createElement('button');
+                                btn.textContent = time;
+                                btn.onclick = () => bookAppointment(doctor._id, date, time);
+                                slotsDiv.appendChild(btn);
+                            });
+                        }
+                    });
                 });
             })
             .catch(error => {
@@ -73,3 +112,5 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 });
+
+

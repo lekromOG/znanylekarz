@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<body>
+    <header>
+        <nav class="navigation-bar">
+            <div class="logo"><img src="../img/gooddoctor.png" alt="gooddoctor" class="logo"></div>
+            <button class="phone-menu-toggle" id="burger-menu">☰</button>
+            <ul class="nav-links" id="nav-links"></ul>
+        </nav>
+    </header>
+    <main>
+        <h1>User Profile</h1>
+        <div id="user-profile-view">
+            <p><strong>Name:</strong> <span id="view-name"></span></p>
+            <p><strong>Lastname:</strong> <span id="view-lastname"></span></p>
+            <p><strong>Email:</strong> <span id="view-email"></span></p>
+            <button id="edit-btn">Edit</button>
+        </div>
+        <form id="user-profile-form" style="display:none;">
+            <label>
+                Name:
+                <input type="text" id="user-name" name="name">
+            </label>
+            <label>
+                Lastname:
+                <input type="text" id="user-lastname" name="lastname">
+            </label>
+            <label>
+                Email:
+                <input type="email" id="user-email" name="email" disabled>
+            </label>
+            <button type="submit">Save</button>
+            <button type="button" id="cancel-btn">Cancel</button>
+        </form>
+        <div id="profile-message"></div>
+    </main>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/user.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchAndSetNav(document.getElementById('nav-links'));
+        });
+    </script>
+</body>
+</html>
