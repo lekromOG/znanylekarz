@@ -18,6 +18,15 @@ const getDoctors = async (req, res) => {
     }
 };
 
+const deleteDoctor = async (req, res) => {
+    try {
+        await Doctor.findByIdAndDelete(req.params.id);
+        res.sendStatus(204);
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete doctor' });
+    }
+};
+
 // TO DO
 const getDoctorsByParameters = async (req, res) => {
     const parameters = req.params;
@@ -34,5 +43,5 @@ const getDoctorsByParameters = async (req, res) => {
 }
 
 export {
-    getDoctors
+    getDoctors, deleteDoctor
 }

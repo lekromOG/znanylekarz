@@ -28,6 +28,10 @@ app.use('/api', auth);
 app.use('/api/doctors', doctors);
 app.use('/api/users', users);
 
+app.get('/Admin', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/src/admin.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
