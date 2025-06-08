@@ -1,4 +1,6 @@
-import { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
+const { Schema, Types, model } = mongoose;
+const ObjectId = Types.ObjectId;
 
 const doctorSchema = new Schema({
     user_id: { type: ObjectId, ref: 'users', required: true },
