@@ -5,7 +5,6 @@ function createNavLinks(links, container) {
         const a = document.createElement("a");
         a.href = linkData.href;
         a.textContent = linkData.text;
-        a.target = "_blank";
         li.appendChild(a);
         container.appendChild(li);
     });

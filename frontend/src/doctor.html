@@ -3,9 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Doctor Profile</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
-    
+    <header>
+        <nav class="navigation-bar">
+            <div class="logo"><img src="../img/gooddoctor.png" alt="gooddoctor" class="logo"></div>
+            <ul class="nav-links" id="nav-links"></ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Doctor Profile</h1>
+        <form id="doctor-profile-form">
+            <label>
+                Name:
+                <input type="text" id="doctor-name" name="name">
+            </label>
+            <label>
+                Specialty:
+                <input type="text" id="doctor-specialty" name="specialty">
+            </label>
+            <label>
+                Location:
+                <input type="text" id="doctor-location" name="location">
+            </label>
+            <label>
+                Available Days:
+                <input type="text" id="doctor-days" name="days" placeholder="e.g. Monday, Wednesday">
+            </label>
+            <label>
+                Available Hours:
+                <input type="text" id="doctor-hours" name="hours" placeholder="e.g. 09:00-15:00">
+            </label>
+            <button type="submit">Save</button>
+        </form>
+        <div id="profile-message"></div>
+    </main>
+    <script src="scripts/doctor.js"></script>
 </body>
 </html>

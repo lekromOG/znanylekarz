@@ -27,6 +27,22 @@ const deleteDoctor = async (req, res) => {
     }
 };
 
+const getMyDoctorProfile = async (req, res) => {
+    const doctor = await Doctor.findOne({ user_id: req.user_uuid });
+    if (!doctor) return res.status(404).json({ error: 'Not found' });
+    res.json(doctor);
+};
+
+const updateMyDoctorProfile = async (req, res) => {
+    const { name, specialty, location, availableDays, availableHours } = req.body;
+    const doctor = await Doctor.findOneAndUpdate(
+        { user_id: req.user_uuid },
+        { name, specialty, location, availableDays, availableHours },
+        { new: true }
+    );
+    res.json(doctor);
+};
+
 // TO DO
 const getDoctorsByParameters = async (req, res) => {
     const parameters = req.params;
@@ -43,5 +59,5 @@ const getDoctorsByParameters = async (req, res) => {
 }
 
 export {
-    getDoctors, deleteDoctor
+    getDoctors, deleteDoctor, getMyDoctorProfile, updateMyDoctorProfile
 }
