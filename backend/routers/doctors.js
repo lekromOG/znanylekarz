@@ -1,8 +1,8 @@
 import express from 'express';
-const router = express.Router();
 import { getDoctors } from '../controllers/doctors.js';
 
-router.get('/doctors', getDoctors);
-// router.get('/doctors/:city/:specialty/:sort', getDoctorsByParameters);
+const router = express.Router();
+
+router.get('/', getDoctors);
 
 export default router;
