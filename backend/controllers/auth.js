@@ -53,7 +53,7 @@ const register = async (req, res) => {
                 name: `${name} ${lastname}`,
                 specialty: '',   // puste, do uzupełnienia później
                 location: '',    // puste, do uzupełnienia później
-                available: true
+                online: true
             });
             await newDoctor.save();
         }

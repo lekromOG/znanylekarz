@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function bookAppointment(doctorId, date, time) {
+        console.log('Booking:', { doctorId, date, time }); 
         fetch('/api/appointments', {
             method: 'POST',
             headers: {
@@ -71,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         <p><strong>Specialty:</strong> ${doctor.specialty}</p>
                         <p><strong>Location:</strong> ${doctor.location}</p>
                         <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
-                        ${doctor.available ? '<span class="badge bg-success">Available</span>' : '<span class="badge bg-secondary">Unavailable</span>'}
                     `;
                     resultsDiv.appendChild(doctorDiv);
 
@@ -80,8 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     slotsDiv.className = 'slots';
                     doctorDiv.appendChild(slotsDiv);
 
+                    console.log(doctor);
                     // Assume you have a selectedDate variable from your search/filter UI
-                    fetch(`/api/doctors/${doctor._id}/slots?date=${date}`, {
+                    fetch(`/api/doctors/${doctor.id}/slots?date=${date}`, {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
                         }
@@ -94,7 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             slots.forEach(time => {
                                 const btn = document.createElement('button');
                                 btn.textContent = time;
-                                btn.onclick = () => bookAppointment(doctor._id, date, time);
+                                btn.onclick = () => {
+                                    bookAppointment(doctor.id, date, time);
+                                    btn.disabled = true; 
+                                }
                                 slotsDiv.appendChild(btn);
                             });
                         }

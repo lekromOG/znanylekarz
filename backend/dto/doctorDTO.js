@@ -5,5 +5,7 @@ export const doctorListDTO = (doctor) => ({
   specialty: doctor.specialty,
   location: doctor.location,
   rating: doctor.rating,
-  opinionsCount: doctor.opinionsCount
+  online: doctor.online,
+  opinionsCount: doctor.opinionsCount,
+  availableDays: doctor.availableDays,
 });

@@ -4,7 +4,7 @@ import { doctorListDTO } from '../dto/doctorDTO.js';
 
 const getDoctorsDefault = async (req, res) => {
     try {
-        const { specialty, location, appointmentType } = req.query;
+        const { specialty, location, appointmentType} = req.query;
         const page = parseInt(req.query.page) || 1;
         const limit = 10;
         const skip = (page - 1) * limit;
@@ -12,13 +12,16 @@ const getDoctorsDefault = async (req, res) => {
 
         if (specialty) filter.specialty = specialty;
         if (location) filter.location = location;
-        if (appointmentType === 'online') filter.available = true;
-        if (appointmentType === 'in-person') filter.available = false;
 
+        if (appointmentType === 'online') {
+            filter.online = true;
+        } else {
+            filter.online = false;
+        }
+        
         const doctors = await Doctor
             .find(filter)
-            .populate('user_id')
-            .populate('profilePicture')             
+            .populate('user_id')       
             .populate('opinions.user_id')
             .sort({ rating: -1 })
             .limit(limit)
@@ -27,6 +30,7 @@ const getDoctorsDefault = async (req, res) => {
         res.json(dtoList);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch doctors' });
+        console.log(err);
     }
 };
 

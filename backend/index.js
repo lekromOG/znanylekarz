@@ -7,6 +7,8 @@ import { dirname } from 'path';
 import auth from './routers/auth.js';
 import doctors from './routers/doctors.js';
 import users from './routers/users.js';
+import appointmentsRouter from './routers/appointments.js';
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -27,6 +29,7 @@ app.use('/img', express.static(path.join(__dirname, '../frontend/img')));
 app.use('/api', auth);
 app.use('/api/doctors', doctors);
 app.use('/api/users', users);
+app.use('/api/appointments', appointmentsRouter);
 
 app.get('/Admin', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/src/admin.html'));
