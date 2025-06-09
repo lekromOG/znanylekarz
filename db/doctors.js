@@ -5,10 +5,12 @@ const ObjectId = Types.ObjectId;
 const doctorSchema = new Schema({
     user_id: { type: ObjectId, ref: 'users', required: true },
     name: { type: String, required: true },
+    profilePicture: { type: String, ref: 'users' },
     specialty: { type: String, required: false, default: '' },
     location: { type: String, required: false, default: '' },
     available: { type: Boolean, default: true },
     rating: { type: Number, default: 0 },
+    opinionsCount: { type: Number, default: 0 },
     availableDays: [{ type: String }],
     opinions: [{
         user_id: { type: ObjectId, ref: 'users', required: true },

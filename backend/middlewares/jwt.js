@@ -1,5 +1,6 @@
 import jwt from 'jsonwebtoken';
 import * as fs from 'node:fs';
+import User from '../../db/users.js';
 
 const authenticateToken = async (req, res, next) => {
     try {
@@ -16,14 +17,25 @@ const authenticateToken = async (req, res, next) => {
                 req.user_uuid = user.sub;
                 next();
             });
-        } 
-        else return res.status(401).json({ error: 'No token provided' });
+        } else return res.status(401).json({ error: 'No token provided' });
     } catch (err) {
         console.log(err);
         return res.status(401).json({ error: "Unauthorized" }) 
     };
 };
 
+const authorizeAdmin = async (req, res, next) => {
+    try {
+        const checkAdmin = User.findById(req.user_uuid);
+        if (checkAdmin.role === "admin") {
+            next();
+        } else return res.status(403).json({ error: "Unauthorized" })
+    } catch (err) {
+        return res.status(500).json({ error: "CheckPermission error" })
+    }
+}
+
 export {
-    authenticateToken
+    authenticateToken,
+    authorizeAdmin
 };

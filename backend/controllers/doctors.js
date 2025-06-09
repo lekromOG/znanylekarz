@@ -1,19 +1,30 @@
 import Doctor from '../../db/doctors.js';
 import Appointment from '../../db/appointments.js';
+import { doctorListDTO } from '../dto/doctorDTO.js';
 
-const getDoctors = async (req, res) => {
+const getDoctorsDefault = async (req, res) => {
     try {
-        const { specialty, location, date, appointmentType } = req.query;
+        const { specialty, location, appointmentType } = req.query;
+        const page = parseInt(req.query.page) || 1;
+        const limit = 10;
+        const skip = (page - 1) * limit;
         const filter = {};
 
         if (specialty) filter.specialty = specialty;
         if (location) filter.location = location;
-        if (appointmentType) filter.available = appointmentType === 'online' ? true : true; // Adjust if you store type
+        if (appointmentType === 'online') filter.available = true;
+        if (appointmentType === 'in-person') filter.available = false;
 
-        // If you want to filter by date, add logic here (e.g., availableDates: { $in: [date] })
-
-        const doctors = await Doctor.find(filter);
-        res.json(doctors);
+        const doctors = await Doctor
+            .find(filter)
+            .populate('user_id')
+            .populate('profilePicture')             
+            .populate('opinions.user_id')
+            .sort({ rating: -1 })
+            .limit(limit)
+            .skip(skip);
+        const dtoList = doctors.map(doctorListDTO);    
+        res.json(dtoList);
     } catch (err) {
         res.status(500).json({ error: 'Failed to fetch doctors' });
     }
@@ -43,21 +54,6 @@ const updateMyDoctorProfile = async (req, res) => {
     );
     res.json(doctor);
 };
-
-// TO DO
-const getDoctorsByParameters = async (req, res) => {
-    const parameters = req.params;
-    try {
-        console.log(parameters);
-        res.
-            status(200)
-            .json({ parameters });
-    } catch (err) {
-        res
-            .status(400)
-            .json({ error: `${err}` });
-    }
-}
 
 function generateSlots() {
     const slots = [];
@@ -89,7 +85,10 @@ const getDoctorSlots = async (req, res) => {
     res.json(availableSlots);
 };
 
-
 export {
-    getDoctors, deleteDoctor, getMyDoctorProfile, updateMyDoctorProfile, getDoctorsByParameters, getDoctorSlots
+    getDoctorsDefault, 
+    deleteDoctor, 
+    getMyDoctorProfile, 
+    updateMyDoctorProfile,
+    getDoctorSlots
 }
