@@ -90,14 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     .then(res => res.json())
                     .then(slots => {
                         if (slots.length === 0) {
-                            slotsDiv.textContent = 'No available slots for this day.';
+                            slotsDiv.textContent = 'No slots defined for this day.';
                         } else {
-                            slots.forEach(time => {
+                            slots.forEach(slot => {
                                 const btn = document.createElement('button');
-                                btn.textContent = time;
-                                btn.onclick = () => {
-                                    bookAppointment(doctor.id, date, time);
-                                    btn.disabled = true; 
+                                btn.textContent = slot.time;
+                                if (slot.available) {
+                                    btn.onclick = () => {
+                                        if (!localStorage.getItem('token')) {
+                                            window.location.href = '/register.html'; // Adjust path if needed
+                                            return;
+                                        }
+                                        bookAppointment(doctor.id, date, slot.time);
+                                        btn.disabled = true;
+                                    };
+                                } else {
+                                    btn.disabled = true;
+                                    btn.classList.add('unavailable-slot');
                                 }
                                 slotsDiv.appendChild(btn);
                             });

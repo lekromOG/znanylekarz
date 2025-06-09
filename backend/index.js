@@ -42,3 +42,7 @@ app.get('/logout', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+app.get('/appointments', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/src/appointments.html'));
+});
