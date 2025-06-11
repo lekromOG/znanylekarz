@@ -46,7 +46,7 @@ export const getUserAppointments = async (req, res) => {
                 .sort({ date: 1, time: 1 });
 
             const result = appointments.map(app => ({
-                _id: app._id,
+                id: app._id,
                 date: app.date,
                 time: app.time,
                 doctorName: app.doctorId?.name,
@@ -65,11 +65,11 @@ export const getUserAppointments = async (req, res) => {
                         select: 'profilePicture name lastname'
                     }
                 })
-                .populate('userId', 'name')
+                .populate('userId', 'name lastname')
                 .sort({ date: 1, time: 1 });
 
             const result = appointments.map(app => ({
-                _id: app._id,
+                id: app._id,
                 date: app.date,
                 time: app.time,
                 doctorName: app.doctorId?.name,

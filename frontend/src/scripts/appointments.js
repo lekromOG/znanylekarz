@@ -45,9 +45,10 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             const cancelBtn = document.createElement('button');
             cancelBtn.textContent = 'Cancel';
+            cancelBtn.className = 'cancel-appointment-btn';
             cancelBtn.onclick = () => {
                 if (confirm('Are you sure you want to cancel this appointment?')) {
-                    fetch(`/api/appointments/${app._id}`, {
+                    fetch(`/api/appointments/${app.id}`, {
                         method: 'DELETE',
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')

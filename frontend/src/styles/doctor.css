@@ -1,3 +1,7 @@
+body {
+    background-color: #f3f3f3;
+}
+
 .appointment-container {
     display: flex;
     flex-direction: column;
@@ -27,13 +31,29 @@
 
 .appointment-item {
     width: 100%;
-    border: 1px solid #ccc;
     border-radius: 10px;
     padding: 20px;
     max-width: 460px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: white;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-appointment-btn {
+    background-color: white;
+    color: red;
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px 10px;
+    transition: background-color 0.2s ease;
+}
+
+.cancel-appointment-btn:hover {
+    background-color: red;
+    color: white;
+    cursor: pointer;
 }
 
 .appointment-details {
