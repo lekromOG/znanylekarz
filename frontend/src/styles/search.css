@@ -92,6 +92,40 @@ input[type="date"],
     padding-bottom: 20px;
 }
 
+.slot-button {
+    background-color: #5AAF9C;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
+
+.slot-button:hover {
+    background-color: #4a9f8b;
+}
+
+.unavailable-slot {
+    background-color: #ccc;
+    color: #666;
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: none;
+    cursor: not-allowed;
+}
+
+.unavailable-slot:hover {
+    background-color: #bbb;
+}
+
+.slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
 @media (max-width: 900px) {
     .search-filter {
         max-width: 100%;

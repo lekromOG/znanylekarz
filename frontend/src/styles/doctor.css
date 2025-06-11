@@ -9,3 +9,41 @@
     padding: 20px;
 }
 
+#appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px;
+}
+
+.appointments-list-ul {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.appointment-item {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 460px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.appointment-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+    #appointments-list {
+        max-width: 200px;
+    }
+}

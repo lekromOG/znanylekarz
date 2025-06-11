@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/user.css">
 </head>
 <body>
     <header>
@@ -15,30 +16,44 @@
         </nav>
     </header>
     <main>
-        <h1>User Profile</h1>
-        <div id="user-profile-view">
-            <p><strong>Name:</strong> <span id="view-name"></span></p>
-            <p><strong>Lastname:</strong> <span id="view-lastname"></span></p>
-            <p><strong>Email:</strong> <span id="view-email"></span></p>
-            <button id="edit-btn">Edit</button>
+        <div class="user-heading">
+            <h3>User Profile</h3>
         </div>
-        <form id="user-profile-form" style="display:none;">
-            <label>
-                Name:
-                <input type="text" id="user-name" name="name">
-            </label>
-            <label>
-                Lastname:
-                <input type="text" id="user-lastname" name="lastname">
-            </label>
-            <label>
-                Email:
-                <input type="email" id="user-email" name="email" disabled>
-            </label>
-            <button type="submit">Save</button>
-            <button type="button" id="cancel-btn">Cancel</button>
-        </form>
-        <div id="profile-message"></div>
+        <div class="user-container">
+            <div id="user-profile-view">
+                <div class="user-info">
+                    <p><strong>Name:</strong> <span id="view-name"></span></p>
+                    <p><strong>Lastname:</strong> <span id="view-lastname"></span></p>
+                    <p><strong>Email:</strong> <span id="view-email"></span></p>
+                </div>
+                <button id="edit-btn">Edit</button>
+                <div id="profile-message"></div>
+            </div>
+        </div>
+        <div class="user-container">
+            <form id="user-profile-form" style="display: none;">
+                <div class="form-inputs-container">                    
+                    <div class="form-inputs">
+                        <label>
+                            <p>Name:</p>
+                            <input type="text" id="user-name" name="name">
+                        </label>
+                        <label>
+                            <p>Lastname:</p> 
+                            <input type="text" id="user-lastname" name="lastname">
+                        </label>
+                        <label>
+                            <p>Email:</p> 
+                            <input type="email" id="user-email" name="email" disabled>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    <button type="submit">Save</button>
+                    <button type="button" id="cancel-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
     </main>
     <script src="scripts/utils.js"></script>
     <script src="scripts/user.js"></script>

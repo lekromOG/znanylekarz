@@ -22,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.getElementById('edit-btn').addEventListener('click', function() {
         document.getElementById('user-profile-view').style.display = 'none';
-        document.getElementById('user-profile-form').style.display = 'block';
+        document.getElementById('user-profile-form').style.display = 'flex';
     });
 
     document.getElementById('cancel-btn').addEventListener('click', function() {
         document.getElementById('user-profile-form').style.display = 'none';
-        document.getElementById('user-profile-view').style.display = 'block';
+        document.getElementById('user-profile-view').style.display = 'flex';
         document.getElementById('user-name').value = userData.name || '';
         document.getElementById('user-lastname').value = userData.lastname || '';
     });
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('view-name').textContent = updatedUser.name || '';
             document.getElementById('view-lastname').textContent = updatedUser.lastname || '';
             document.getElementById('user-profile-form').style.display = 'none';
-            document.getElementById('user-profile-view').style.display = 'block';
+            document.getElementById('user-profile-view').style.display = 'flex';
             document.getElementById('profile-message').textContent = 'Profile updated!';
         })
         .catch(() => {

@@ -94,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     doctorDiv.className = 'doctor-card';
                     doctorDiv.innerHTML = `
                         <div class="doctor-card-header">
-                            <h3>${doctor.name}</h3>
+                            <h3>Doctor: ${doctor.name}</h3>
                             <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
                         </div>
                         <div class="doctor-card-body">
@@ -121,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         } else {
                             slots.forEach(slot => {
                             const btn = document.createElement('button');
+                            btn.className = 'slot-button';
                             btn.textContent = slot.time;
                            if (slot.available) {
                                 btn.onclick = () => {

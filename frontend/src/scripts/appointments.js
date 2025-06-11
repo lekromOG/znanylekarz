@@ -29,13 +29,19 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         const ul = document.createElement('ul');
+        ul.className = 'appointments-list-ul';
         data.forEach(app => {
             const li = document.createElement('li');
+            li.className = 'appointment-item';
             li.innerHTML = `
-                <strong>Date:</strong> ${app.date} 
-                <strong>Time:</strong> ${app.time} 
-                <strong>Doctor:</strong> ${app.doctorName || '-'}
-                <strong>Patient:</strong> ${app.patientName || '-'}
+                <div class="appointment-header">
+                    <p>Doctor: ${app.doctorName || '-'}</p> 
+                    <p>Patient: ${app.patientName || '-'}</p> 
+                    <p>Time: ${app.time} </p> 
+                </div>
+                <div class="appointment-details" id="appointment-details">
+                    <p>Date: ${app.date}</p> 
+                </div>
             `;
             const cancelBtn = document.createElement('button');
             cancelBtn.textContent = 'Cancel';
@@ -54,7 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     .catch(() => alert('Failed to cancel appointment'));
                 }
             };
-            li.appendChild(cancelBtn);
+            const detailsDiv = li.querySelector('.appointment-details');
+            detailsDiv.appendChild(cancelBtn);
             ul.appendChild(li);
         });
         listDiv.appendChild(ul);
