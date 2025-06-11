@@ -11,6 +11,11 @@ export const createAppointment = async (req, res) => {
             return res.status(400).json({ error: 'Missing required fields' });
         }
 
+        const existing = await Appointment.findOne({ userId, date });
+        if (existing) {
+            return res.status(400).json({ error: 'You already have an appointment on this day.' });
+        }
+
         const appointment = new Appointment({
             doctorId,
             userId,

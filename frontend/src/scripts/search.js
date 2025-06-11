@@ -43,7 +43,15 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             body: JSON.stringify({ doctorId, date, time })
         })
-        .then(res => res.ok ? alert('Appointment booked!') : alert('Booking failed'));
+        .then(async res => {
+        if (res.ok) {
+            alert('Appointment booked!');
+        } else {
+            const data = await res.json();
+            alert(data.error || 'Booking failed');
+        }
+    });
+        
     }
 
         fetch(`/api/doctors${apiQuery}`)
@@ -98,14 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
                                             return;
                                         }
                                         bookAppointment(doctor.id, date, slot.time);
-                                        btn.disabled = true;
                                     };
                                 } else {
                                     btn.disabled = true;
                                     btn.classList.add('unavailable-slot');
                                 }
                                 slotsDiv.appendChild(btn);
-                            });
+                        });
                         }
                     });
                 });
