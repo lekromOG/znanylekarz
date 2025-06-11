@@ -46,11 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(res => res.ok ? alert('Appointment booked!') : alert('Booking failed'));
     }
 
-        // Fetch doctors from API and display them
         fetch(`/api/doctors${apiQuery}`)
             .then(response => response.json())
             .then(data => {
-                // Create or select the results container
                 let resultsDiv = document.querySelector('.search-results');
                 if (!resultsDiv) {
                     resultsDiv = document.createElement('div');
@@ -75,13 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     resultsDiv.appendChild(doctorDiv);
 
-                         // After creating doctorDiv and appending to resultsDiv:
                     const slotsDiv = document.createElement('div');
                     slotsDiv.className = 'slots';
                     doctorDiv.appendChild(slotsDiv);
 
                     console.log(doctor);
-                    // Assume you have a selectedDate variable from your search/filter UI
                     fetch(`/api/doctors/${doctor.id}/slots?date=${date}`, {
                         headers: {
                             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -98,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 if (slot.available) {
                                     btn.onclick = () => {
                                         if (!localStorage.getItem('token')) {
-                                            window.location.href = '/register.html'; // Adjust path if needed
+                                            window.location.href = '/register.html'; 
                                             return;
                                         }
                                         bookAppointment(doctor.id, date, slot.time);
@@ -123,6 +119,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 resultsDiv.innerHTML = '<p>Error loading doctor data.</p>';
             });
+    }
+
+    const dropdowns = document.querySelectorAll('.custom-dropdown');
+    dropdowns.forEach(dropdown => {
+        const input = dropdown.querySelector('.dropdown-input');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        const items = dropdownList.querySelectorAll('.dropdown-item');
+
+        input.addEventListener('focus', () => {
+            dropdownList.classList.add('show');
+        });
+
+        items.forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+                input.value = this.textContent.trim();
+                dropdownList.classList.remove('show');
+                input.blur();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) {
+                dropdownList.classList.remove('show');
+            }
+        });
+
+        input.addEventListener('input', () => {
+            const filter = input.value.toLowerCase();
+            items.forEach(item => {
+                if (item.textContent.toLowerCase().includes(filter)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    const inPersonButton = document.getElementById('in-person');
+    const onlineButton = document.getElementById('online');
+    const locationSearch = document.getElementById('voivodeship-dropdown');
+
+    if (inPersonButton && onlineButton && locationSearch) {
+        inPersonButton.addEventListener('click', () => {
+            inPersonButton.classList.add('button-active');
+            onlineButton.classList.remove('button-active');
+            locationSearch.style.display = 'block';
+        });
+
+        onlineButton.addEventListener('click', () => {
+            onlineButton.classList.add('button-active');
+            inPersonButton.classList.remove('button-active');
+            locationSearch.style.display = 'none';
+        });
+    }
+
+    const searchButton = document.getElementById('search-button');
+    if (searchButton) {
+        searchButton.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const specialtyInput = document.querySelector('#dropdown-input');
+            const locationInput = document.querySelector('#voivodeship-dropdown input');
+            const dateInput = document.querySelector('input[type="date"]');
+            let specialty = specialtyInput ? specialtyInput.value : '';
+            let location = locationInput ? locationInput.value : '';
+            let date = dateInput ? dateInput.value : '';
+
+            let appointmentType = '';
+            if (document.getElementById('in-person').classList.contains('button-active')) {
+                appointmentType = 'in-person';
+            } else if (document.getElementById('online').classList.contains('button-active')) {
+                appointmentType = 'online';
+            }
+
+            const params = [];
+            if (specialty) params.push(`specialty=${encodeURIComponent(specialty)}`);
+            if (location) params.push(`location=${encodeURIComponent(location)}`);
+            if (date) params.push(`date=${encodeURIComponent(date)}`);
+            if (appointmentType) params.push(`appointmentType=${encodeURIComponent(appointmentType)}`);
+            const query = params.length ? `?${params.join('&')}` : '';
+
+            window.location.href = `/search.html${query}`;
+        });
     }
 });
 

@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let availableDays = [];
 
-    // Fetch doctor profile and populate fields
     fetch('/api/doctors/me', {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -17,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
         renderAvailableDays();
     });
 
-    // Add available day
     document.getElementById('add-day-btn').onclick = function() {
         const day = document.getElementById('add-available-day').value;
         if (day && !availableDays.includes(day)) {
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('add-available-day').value = '';
     };
 
-    // Render available days list
     function renderAvailableDays() {
         const ul = document.getElementById('available-days-list');
         ul.innerHTML = '';
@@ -38,7 +35,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Save doctor profile
     document.getElementById('doctor-profile-form').onsubmit = function(e) {
         e.preventDefault();
         const data = {

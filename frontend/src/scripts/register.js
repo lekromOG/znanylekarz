@@ -10,23 +10,21 @@ const options = customSelect.querySelectorAll('.option');
 const hiddenInput = document.getElementById('role');
 
 selected.addEventListener('click', (e) => {
-    e.stopPropagation(); // Prevent the click from propagating to the document
+    e.stopPropagation(); 
     optionsContainer.classList.toggle('hidden');
 });
 
-// Handle option selection
 options.forEach(option => {
     option.addEventListener('click', () => {
         selected.textContent = option.textContent;
-        hiddenInput.value = option.dataset.value; // Set the hidden input value
-        optionsContainer.classList.add('hidden'); // Hide the dropdown
+        hiddenInput.value = option.dataset.value;
+        optionsContainer.classList.add('hidden');
     });
 });
 
-// Close the dropdown when clicking outside of it
 document.addEventListener('click', (e) => {
     if (!customSelect.contains(e.target)) {
-        optionsContainer.classList.add('hidden'); // Hide the dropdown
+        optionsContainer.classList.add('hidden'); 
     }
 });
 

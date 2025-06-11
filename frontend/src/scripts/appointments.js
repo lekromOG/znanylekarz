@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 <strong>Doctor:</strong> ${app.doctorName || '-'}
                 <strong>Patient:</strong> ${app.patientName || '-'}
             `;
-            // Add cancel button
             const cancelBtn = document.createElement('button');
             cancelBtn.textContent = 'Cancel';
             cancelBtn.onclick = () => {

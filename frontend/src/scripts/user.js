@@ -18,22 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('user-email').value = user.email || '';
     });
 
-    // Show edit form
     document.getElementById('edit-btn').addEventListener('click', function() {
         document.getElementById('user-profile-view').style.display = 'none';
         document.getElementById('user-profile-form').style.display = 'block';
     });
 
-    // Cancel editing
     document.getElementById('cancel-btn').addEventListener('click', function() {
         document.getElementById('user-profile-form').style.display = 'none';
         document.getElementById('user-profile-view').style.display = 'block';
-        // Reset form values to original
         document.getElementById('user-name').value = userData.name || '';
         document.getElementById('user-lastname').value = userData.lastname || '';
     });
 
-    // Handle profile update
     document.getElementById('user-profile-form').addEventListener('submit', function(e) {
         e.preventDefault();
         const data = {
