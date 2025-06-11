@@ -39,28 +39,49 @@ export const getUserAppointments = async (req, res) => {
         if (user.role === 'doctor') {
             const doctor = await Doctor.findOne({ user_id: userId });
             if (!doctor) return res.json([]);
+            
             appointments = await Appointment.find({ doctorId: doctor._id })
-                .populate('userId', 'name')
-                .populate('doctorId', 'name')
+                .populate('userId', 'name lastname profilePicture')
+                .populate('doctorId', 'name') 
                 .sort({ date: 1, time: 1 });
+
+            const result = appointments.map(app => ({
+                _id: app._id,
+                date: app.date,
+                time: app.time,
+                doctorName: app.doctorId?.name,
+                patientName: `${app.userId?.name} ${app.userId?.lastname}`,
+                profilePicture: app.userId?.profilePicture
+            }));
+            
+            return res.status(200).json(result);
         } else {
             appointments = await Appointment.find({ userId })
-                .populate('doctorId', 'name')
+                .populate({
+                    path: 'doctorId',
+                    select: 'name',
+                    populate: {
+                        path: 'user_id',
+                        select: 'profilePicture name lastname'
+                    }
+                })
                 .populate('userId', 'name')
                 .sort({ date: 1, time: 1 });
+
+            const result = appointments.map(app => ({
+                _id: app._id,
+                date: app.date,
+                time: app.time,
+                doctorName: app.doctorId?.name,
+                patientName: `${app.userId?.name} ${app.userId?.lastname}`,
+                profilePicture: app.doctorId?.user_id?.profilePicture
+            }));
+
+            return res.status(200).json(result);
         }
 
-        const result = appointments.map(app => ({
-            _id: app._id,
-            date: app.date,
-            time: app.time,
-            doctorName: app.doctorId?.name,
-            patientName: app.userId?.name
-        }));
-
-        res.json(result);
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch appointments' });
+        return res.status(500).json({ error: err.message || err });
     }
 };
 
