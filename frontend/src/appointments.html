@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Appointments</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/shared.css">
+    <link rel="stylesheet" href="styles/doctor.css">
 </head>
 <body>
     <header>
@@ -14,8 +17,12 @@
         </nav>
     </header>
     <main>
-        <h1>Your Appointments</h1>
-        <div id="appointments-list"></div>
+        <div class="appointment-container">
+            <h1 class="appointment-heading">Your Appointments</h1>
+            <div class="appointment-inner-container">
+                <div id="appointments-list"></div>
+            </div>
+        </div>
     </main>
     <script src="scripts/utils.js"></script>
     <script src="scripts/appointments.js"></script>

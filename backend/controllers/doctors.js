@@ -146,7 +146,7 @@ const opinionDoctor = async (req, res) => {
         rating: roundedRating
     });
     
-    return res.status(201).json({ message: newOpinion });
+    return res.status(201).json({ message: "Successfully rated the doctor" });
 
   } catch (err) {
     return res.status(500).json({ error: 'Internal server error' });

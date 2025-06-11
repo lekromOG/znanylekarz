@@ -176,3 +176,18 @@ a {
         padding-right: 50px;
     }
 }
+
+.phone-menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+@media (min-width: 769px) {
+    .phone-menu-toggle {
+        display: none;
+    }
+}
