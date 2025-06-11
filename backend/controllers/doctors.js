@@ -50,10 +50,10 @@ const getMyDoctorProfile = async (req, res) => {
 };
 
 const updateMyDoctorProfile = async (req, res) => {
-    const { name, specialty, location, availableDays, availableHours } = req.body;
+    const { name, specialty, location, availableDays, online } = req.body;
     const doctor = await Doctor.findOneAndUpdate(
         { user_id: req.user_uuid },
-        { name, specialty, location, availableDays, availableHours },
+        { name, specialty, location, availableDays, online },
         { new: true }
     );
     res.json(doctor);

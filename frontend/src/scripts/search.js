@@ -93,10 +93,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     const doctorDiv = document.createElement('div');
                     doctorDiv.className = 'doctor-card';
                     doctorDiv.innerHTML = `
-                        <h3>${doctor.name}</h3>
-                        <p><strong>Specialty:</strong> ${doctor.specialty}</p>
-                        <p><strong>Location:</strong> ${doctor.location}</p>
-                        <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
+                        <div class="doctor-card-header">
+                            <h3>${doctor.name}</h3>
+                            <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
+                        </div>
+                        <div class="doctor-card-body">
+                            <p><strong>Specialty:</strong> ${doctor.specialty}</p>
+                            <p><strong>Location:</strong> ${doctor.location}</p>
+                        </div>
                     `;
                     resultsDiv.appendChild(doctorDiv);
 
