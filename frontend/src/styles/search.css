@@ -48,8 +48,6 @@
     width: 100%;
     max-width: 900px;
     margin-top: 20px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
     padding: 16px;
 }
 
@@ -73,6 +71,12 @@ input[type="date"],
 
 .search-button:hover {
     background: #1F2A36;
+}
+
+.doctor-card {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
 }
 
 .doctor-card-header {
