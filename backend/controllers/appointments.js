@@ -5,10 +5,15 @@ import User from '../../db/users.js';
 export const createAppointment = async (req, res) => {
     try {
         const { doctorId, date, time } = req.body;
-        const userId = req.user_uuid; // or req.user.id, depending on your auth
+        const userId = req.user_uuid;
 
         if (!doctorId || !date || !time) {
             return res.status(400).json({ error: 'Missing required fields' });
+        }
+
+        const existing = await Appointment.findOne({ userId, date });
+        if (existing) {
+            return res.status(400).json({ error: 'You already have an appointment on this day.' });
         }
 
         const appointment = new Appointment({
@@ -65,11 +70,9 @@ export const cancelAppointment = async (req, res) => {
         const appointmentId = req.params.id;
         const user = await User.findById(userId);
 
-        // Find the appointment
         const appointment = await Appointment.findById(appointmentId);
         if (!appointment) return res.status(404).json({ error: 'Appointment not found' });
 
-        // Allow if user is patient or doctor for this appointment
         let allowed = false;
         if (user.role === 'doctor') {
             const doctor = await Doctor.findOne({ user_id: userId });

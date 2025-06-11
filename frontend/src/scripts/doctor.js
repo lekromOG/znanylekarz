@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     let availableDays = [];
 
-    // Fetch doctor profile and populate fields
     fetch('/api/doctors/me', {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
@@ -12,12 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('doctor-name').value = doctor.name || '';
         document.getElementById('doctor-specialty').value = doctor.specialty || '';
         document.getElementById('doctor-location').value = doctor.location || '';
-        document.getElementById('doctor-hours').value = doctor.availableHours || '';
+        document.getElementById('doctor-type').value = doctor.online ? 'online' : 'in-person';
         availableDays = doctor.availableDays || [];
         renderAvailableDays();
     });
 
-    // Add available day
     document.getElementById('add-day-btn').onclick = function() {
         const day = document.getElementById('add-available-day').value;
         if (day && !availableDays.includes(day)) {
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('add-available-day').value = '';
     };
 
-    // Render available days list
     function renderAvailableDays() {
         const ul = document.getElementById('available-days-list');
         ul.innerHTML = '';
@@ -38,15 +35,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Save doctor profile
     document.getElementById('doctor-profile-form').onsubmit = function(e) {
         e.preventDefault();
+        const type = document.getElementById('doctor-type').value;
+        const online = type === 'online'; // true if online, false if in-person
+
         const data = {
             name: document.getElementById('doctor-name').value,
             specialty: document.getElementById('doctor-specialty').value,
             location: document.getElementById('doctor-location').value,
             availableDays: availableDays,
-            availableHours: document.getElementById('doctor-hours').value
+            online // <-- send this to backend
         };
         fetch('/api/doctors/me', {
             method: 'PUT',
@@ -60,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(msg => document.getElementById('profile-message').textContent = msg);
     };
 });
+

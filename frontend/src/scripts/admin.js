@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     fetchAndSetNav(document.getElementById('nav-links'));
 
-    // Fetch and display users
     fetch('/api/users')
         .then(res => res.json())
         .then(users => {
@@ -14,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
         });
 
-    // Fetch and display doctors
     fetch('/api/doctors')
         .then(res => res.json())
         .then(doctors => {
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
             `).join('');
         });
 
-    // Add event listeners for delete buttons (delegated)
     document.body.addEventListener('click', e => {
         if (e.target.classList.contains('delete-user')) {
             const id = e.target.getAttribute('data-id');

@@ -73,10 +73,10 @@ const getMyDoctorProfile = async (req, res) => {
 };
 
 const updateMyDoctorProfile = async (req, res) => {
-    const { name, specialty, location, availableDays, availableHours } = req.body;
+    const { name, specialty, location, availableDays, online } = req.body;
     const doctor = await Doctor.findOneAndUpdate(
         { user_id: req.user_uuid },
-        { name, specialty, location, availableDays, availableHours },
+        { name, specialty, location, availableDays, online },
         { new: true }
     );
     res.json(doctor);
@@ -100,7 +100,6 @@ const getDoctorSlots = async (req, res) => {
     if (!doctor) return res.status(404).json({ error: 'Doctor not found' });
 
     if (!doctor.availableDays.includes(date)) {
-        // Return all slots as unavailable for this day
         const allSlots = generateSlots();
         return res.json(allSlots.map(time => ({ time, available: false })));
     }
@@ -109,7 +108,6 @@ const getDoctorSlots = async (req, res) => {
     const bookedTimes = appointments.map(a => a.time);
 
     const allSlots = generateSlots();
-    // Return all slots with their availability
     const slotsWithStatus = allSlots.map(time => ({
         time,
         available: !bookedTimes.includes(time)

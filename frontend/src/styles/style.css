@@ -51,15 +51,6 @@ body, p {
     z-index: 2; 
 }
 
-.location-button {
-    background: none;
-    border: 2px solid white;
-    color: white;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    border-radius: 50px;
-}
-
 .search-form {
     display: flex;
     flex-direction: column;
@@ -67,20 +58,6 @@ body, p {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 5px;
     padding: 10px;
-}
-
-.search-button {
-    border: none;
-    background-color: #2F4858;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 50px;
-}
-
-.search-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
 }
 
 .hero-section {
@@ -91,10 +68,6 @@ body, p {
     width: 100%;
     background-color: #5AAF9C;
     overflow: hidden;
-}
-
-.button-active {
-    background-color: #367A84;
 }
 
 .filler-section {
@@ -156,57 +129,7 @@ body, p {
     border-bottom: 1px solid rgba(0, 0, 0, 0.061);
 }
 
-.custom-dropdown {
-    position: relative;
-    width: 100%;
-    max-width: 210px;
-}
 
-.dropdown-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    outline: none;
-    z-index: 2000;
-}
-
-.dropdown-list {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    max-height: 200px;
-    overflow-y: auto;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 5000; 
-    display: none;
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-.dropdown-list.show {
-    display: block; 
-}
-
-.dropdown-item {
-    padding: 10px;
-    font-size: 16px;
-    cursor: pointer;
-    color: black;
-    transition: background-color 0.2s ease;
-    pointer-events: auto; 
-    z-index: 2000;
-}
-
-.dropdown-item:hover {
-    background-color: #367A84;
-}
 
 .search-tool {
     overflow: visible; 

@@ -4,7 +4,7 @@ import { createAppointment, getUserAppointments, cancelAppointment } from '../co
 import { authenticateToken } from '../middlewares/jwt.js';
 
 router.post('/', authenticateToken, createAppointment);
-router.get('/', authenticateToken, getUserAppointments); // <-- Add this line
+router.get('/', authenticateToken, getUserAppointments); 
 router.delete('/:id', authenticateToken, cancelAppointment);
 
 export default router;

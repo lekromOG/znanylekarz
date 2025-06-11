@@ -2,22 +2,124 @@
 @import '../styles/shared.css';
 
 .results {
-    height: 90vh;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.search-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background-color: #5AAF9C;
+    padding: 24px 0;
 }
 
 .search-filter {
     width: 100%;
-    background-color: red;
-    padding: 20px;
+    max-width: 900px;
+    padding: 24px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+    background: rgba(0,0,0,0.04);
+    box-sizing: border-box;
+}
+
+.search-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .search-results {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     width: 100%;
-    background-color: green;
+    max-width: 900px;
+    margin-top: 20px;
+    padding: 16px;
 }
 
-.filter-options {
+.custom-dropdown,
+input[type="date"],
+.search-button {
+    min-width: 180px;
+    margin: 4px 0;
+    height: 40px;
+}
+
+.search-button {
+    padding: 8px 20px;
+    border-radius: 6px;
+    border: none;
+    background-color: #2F4858;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.search-button:hover {
+    background: #1F2A36;
+}
+
+.doctor-card {
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.doctor-card-header {
     display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.doctor-card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+@media (max-width: 900px) {
+    .search-filter {
+        max-width: 100%;
+        padding: 16px;
+    }
+    .search-container {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    .custom-dropdown,
+    input[type="date"],
+    .search-button {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .custom-dropdown {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .search-center {
+        padding: 8px 0;
+    }
+    .search-filter {
+        padding: 8px;
+        border-radius: 0;
+    }
 }
