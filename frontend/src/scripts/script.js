@@ -54,10 +54,32 @@ searchButton.addEventListener('click', () => {
 
     if (dateInput) params.append('date', dateInput);
 
+    console.log(onlineButton.classList.contains('button-active'), 
+    inPersonButton.classList.contains('button-active'));
+
+    if (onlineButton.classList.contains('button-active')) {
+        localStorage.setItem('appointmentType', 'online');
+    } else if (inPersonButton.classList.contains('button-active')) {
+        localStorage.setItem('appointmentType', 'in-person');
+    }
+
     window.location.href = `search.html?${params.toString()}`;
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
+
+    // Restore the selected appointment type
+    const savedType = localStorage.getItem('appointmentType');
+    if (savedType === 'online') {
+        onlineButton.classList.add('button-active');
+        inPersonButton.classList.remove('button-active');
+        locationSearch.style.display = 'none';
+    } else if (savedType === 'in-person') {
+        inPersonButton.classList.add('button-active');
+        onlineButton.classList.remove('button-active');
+        locationSearch.style.display = 'block';
+    }
 
     dropdowns.forEach(dropdown => {
         const input = dropdown.querySelector('.dropdown-input');

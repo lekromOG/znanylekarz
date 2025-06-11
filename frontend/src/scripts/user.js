@@ -1,6 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
     let userData = {};
 
+    const onlineButton = document.getElementById('online');
+    const inPersonButton = document.getElementById('in-person');
+    const locationSearch = document.getElementById('voivodeship-dropdown');
+
+
+    // Restore the selected appointment type
+    const savedType = localStorage.getItem('appointmentType');
+    if (savedType === 'online') {
+        onlineButton.classList.add('button-active');
+        inPersonButton.classList.remove('button-active');
+        locationSearch.style.display = 'none';
+    } else if (savedType === 'in-person') {
+        inPersonButton.classList.add('button-active');
+        onlineButton.classList.remove('button-active');
+        locationSearch.style.display = 'block';
+    }
+
     // Fetch user profile
     fetch('/api/users/me', {
         headers: {

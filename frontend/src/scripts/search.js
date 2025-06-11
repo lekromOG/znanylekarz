@@ -17,6 +17,22 @@ window.addEventListener('resize', () => {
 document.addEventListener('DOMContentLoaded', () => {
     fetchAndSetNav(navigation);
 
+    const onlineButton = document.getElementById('online');
+    const inPersonButton = document.getElementById('in-person');
+    const locationSearch = document.getElementById('voivodeship-dropdown');
+
+    // Restore the selected appointment type
+    const savedType = localStorage.getItem('appointmentType');
+    if (savedType === 'online') {
+        onlineButton.classList.add('button-active');
+        inPersonButton.classList.remove('button-active');
+        locationSearch.style.display = 'none';
+    } else if (savedType === 'in-person') {
+        inPersonButton.classList.add('button-active');
+        onlineButton.classList.remove('button-active');
+        locationSearch.style.display = 'block';
+    }
+
     if (searchFilter) {
         const params = new URLSearchParams(window.location.search);
         const specialty = params.get('specialty');
@@ -169,10 +185,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const inPersonButton = document.getElementById('in-person');
-    const onlineButton = document.getElementById('online');
-    const locationSearch = document.getElementById('voivodeship-dropdown');
-
     if (inPersonButton && onlineButton && locationSearch) {
         inPersonButton.addEventListener('click', () => {
             inPersonButton.classList.add('button-active');
@@ -212,6 +224,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (date) params.push(`date=${encodeURIComponent(date)}`);
             if (appointmentType) params.push(`appointmentType=${encodeURIComponent(appointmentType)}`);
             const query = params.length ? `?${params.join('&')}` : '';
+
+            if (onlineButton.classList.contains('button-active')) {
+                localStorage.setItem('appointmentType', 'online');
+            } else if (inPersonButton.classList.contains('button-active')) {
+                localStorage.setItem('appointmentType', 'in-person');
+            }
 
             window.location.href = `/search.html${query}`;
         });
