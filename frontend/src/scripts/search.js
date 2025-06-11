@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-    function bookAppointment(doctorId, date, time) {
+    function bookAppointment(doctorId, date, time, btn) {
         console.log('Booking:', { doctorId, date, time }); 
         fetch('/api/appointments', {
             method: 'POST',
@@ -44,14 +44,17 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify({ doctorId, date, time })
         })
         .then(async res => {
-        if (res.ok) {
-            alert('Appointment booked!');
-        } else {
-            const data = await res.json();
-            alert(data.error || 'Booking failed');
-        }
-    });
-        
+                if (res.ok) {
+                    alert('Appointment booked!');
+                    if (btn) {
+                        btn.disabled = true;
+                        btn.classList.add('unavailable-slot');
+                    }
+                } else {
+                    const data = await res.json();
+                    alert(data.error || 'Booking failed');
+                }
+        });
     }
 
         fetch(`/api/doctors${apiQuery}`)
@@ -97,21 +100,22 @@ document.addEventListener('DOMContentLoaded', () => {
                             slotsDiv.textContent = 'No slots defined for this day.';
                         } else {
                             slots.forEach(slot => {
-                                const btn = document.createElement('button');
-                                btn.textContent = slot.time;
-                                if (slot.available) {
-                                    btn.onclick = () => {
-                                        if (!localStorage.getItem('token')) {
-                                            window.location.href = '/register.html'; 
-                                            return;
-                                        }
-                                        bookAppointment(doctor.id, date, slot.time);
-                                    };
-                                } else {
-                                    btn.disabled = true;
-                                    btn.classList.add('unavailable-slot');
-                                }
-                                slotsDiv.appendChild(btn);
+                            const btn = document.createElement('button');
+                            btn.textContent = slot.time;
+                           if (slot.available) {
+                                btn.onclick = () => {
+                                    if (!localStorage.getItem('token')) {
+                                        window.location.href = '/register.html'; 
+                                        return;
+                                    }
+
+                                    bookAppointment(doctor.id, date, slot.time, btn);
+                                };
+                            } else {
+                                btn.disabled = true;
+                                btn.classList.add('unavailable-slot');
+                            }
+                            slotsDiv.appendChild(btn);
                         });
                         }
                     });
