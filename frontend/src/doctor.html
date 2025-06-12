@@ -25,7 +25,7 @@
                 <div class="doctor-profile-information">
                     <div class="doctor-image-container">
                         <label style="cursor: pointer; height: 160px;">
-                            <img id="doctor-image-preview" src="" alt="Profile picture" style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
+                            <img id="doctor-image-preview" src="" alt="Profile picture" style="width:150px; height:150px; object-fit:cover; border-radius:10px; min-width: 150px; min-height: 150px;">
                             <input type="file" id="doctor-image-input" accept="image/*" style="display: none;">
                         </label>
                     </div>
@@ -99,14 +99,14 @@
                     <label>
                         Add Available Day:
                         <input type="date" id="add-available-day">
-                        <button type="button" id="add-day-btn">Add</button>
+                        <button type="button" id="add-day-btn" class="available-button">Add</button>
                     </label>
                     <ul id="available-days-list"></ul>
                 </div>
-                <button type="submit">Save</button>
+                <button type="submit" class="available-button">Save</button>
+                <div id="profile-message"></div>
             </form>
         </div>
-        <div id="profile-message"></div>
     </main>
     <footer class="site-footer">
         <p>&copy; 2025 Good Doctor</p>

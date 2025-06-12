@@ -4,7 +4,7 @@ const usersSchema = new Schema({
     name: { type: String, required: true },
     lastname: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    profilePicture: { type: String , default: '' }, 
+    profilePicture: { type: String , default: 'https://i.imgur.com/D0ARz6B.jpeg' }, 
     password: { type: String, required: true },
     role: { type: String, enum: ['standard', 'doctor', 'admin'], default: 'standard' }
 });

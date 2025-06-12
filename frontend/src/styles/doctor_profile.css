@@ -108,6 +108,15 @@ label {
     align-items: center;
 }
 
+.available-button {
+    padding: 5px 10px;
+    width: 75px;
+    border-radius: 5px;
+    background-color: #367A84;
+    color: white;
+    border: none;
+}
+
 @media screen and (max-width: 600px) {
     #doctor-profile-form {
         width: 100%;

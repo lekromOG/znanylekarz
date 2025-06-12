@@ -50,41 +50,41 @@ const updateMyUserProfile = async (req, res) => {
 };
 
 export const saveUserPicture = async (req, res) => {
-    try {
-        console.log(req);
-        var formdata = new FormData();
-        formdata.append("image", req.body.image); 
-        formdata.append("type", "base64");
-        formdata.append("title", req.user_uuid);
-        formdata.append("description", req.user_uuid);
+    const form = formidable({ multiples: false });
+    form.parse(req, async (err, fields, files) => {
+        if (err) return res.status(400).json({ error: 'Form parse error' });
+        const base64Image = fields.image;
+        if (!base64Image) return res.status(400).json({ error: 'No image provided' });
 
-        const response = await fetch(imgur_api, {
-            method: "POST",
-            body: formdata,
-            headers: {
-                'Authorization': `Client-ID ${client_ID}` 
+        try {
+            const formdata = new URLSearchParams();
+            formdata.append("image", base64Image);
+            formdata.append("type", "base64");
+            formdata.append("title", req.user_uuid);
+            formdata.append("description", req.user_uuid);
+
+            const response = await fetch(imgur_api, {
+                method: "POST",
+                body: formdata,
+                headers: {
+                    'Authorization': `Client-ID ${client_ID}`
+                }
+            });
+            const response_json = await response.json();
+            if (response.ok) {
+                await User.findByIdAndUpdate(
+                    req.user_uuid,
+                    { profilePicture: response_json.data.link }
+                );
+                return res.status(201).json({ message: response_json.data.link });
+            } else {
+                return res.status(400).json({ message: response_json });
             }
-        });
-        const response_json = await response.json();
-        if (response.ok) {
-            User.findByIdAndUpdate(
-                req.user_uuid,
-                { profilePicture: response_json.data.link }
-            );
-            return res
-                .status(201)
-                .json({ message: response_json.data.link });
-        } else {
-            return res
-                .status(400)
-                .json({ message: response_json });
+        } catch (err) {
+            console.error('Error saving user picture:', err);
+            return res.status(500).json({ error: err });
         }
-    } catch (err) {
-        console.error('Error saving user picture:', err);
-        return res
-            .status(500)
-            .json({ error: err });
-    }
+    });
 };
 
 export {
