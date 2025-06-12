@@ -12,6 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('doctor-specialty').value = doctor.specialty || '';
         document.getElementById('doctor-location').value = doctor.location || '';
         document.getElementById('doctor-type').value = doctor.online ? 'online' : 'in-person';
+
+        const welcome = document.getElementById("doctor-welcome");
+        if (welcome && doctor.name) {
+            welcome.textContent = `Welcome, Dr. ${doctor.name.split(" ")[0]}!`;
+        }
+
         availableDays = doctor.availableDays || [];
         renderAvailableDays();
     });
