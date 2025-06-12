@@ -24,7 +24,10 @@
             <form id="doctor-profile-form">
                 <div class="doctor-profile-information">
                     <div class="doctor-image-container">
-                        <img src="" alt="tu bedzie zdjecie">
+                        <label style="cursor: pointer; height: 160px;">
+                            <img id="doctor-image-preview" src="" alt="Profile picture" style="width:150px; height:150px; object-fit:cover; border-radius:10px;">
+                            <input type="file" id="doctor-image-input" accept="image/*" style="display: none;">
+                        </label>
                     </div>
                     <div class="doctor-profile-data">
                         <label class="form-input-label">

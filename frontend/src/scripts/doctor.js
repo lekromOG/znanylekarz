@@ -95,6 +95,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    let doctorImageBase64 = "";
+
+    document.getElementById('doctor-image-input').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            if (file.size > 20 * 1024 * 1024) { // 2MB limit
+                alert('Image is too large! Please select an image under 2MB.');
+                return;
+            }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            doctorImageBase64 = e.target.result; // base64 string with data:image/... prefix
+            document.getElementById('doctor-image-preview').src = doctorImageBase64;
+        };
+        reader.readAsDataURL(file);
+    });
+
+    fetch('/api/users/me', {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    })
+    .then(res => res.json())
+    .then(user => {
+        if (user.profilePicture) {
+            document.getElementById('doctor-image-preview').src = user.profilePicture;
+        }
+    });
+
     document.getElementById('doctor-profile-form').onsubmit = function(e) {
         e.preventDefault();
         const type = document.getElementById('doctor-type').value;
@@ -105,8 +134,24 @@ document.addEventListener('DOMContentLoaded', () => {
             specialty: document.getElementById('doctor-specialty').value,
             location: document.getElementById('doctor-location').value,
             availableDays: availableDays,
-            online // <-- send this to backend
+            online, // <-- send this to backend
         };
+
+        if (doctorImageBase64) {
+            const formData = new FormData();
+            const base64Data = doctorImageBase64.split(',')[1];
+            formData.append('image', base64Data);
+
+            fetch('/api/users/me/avatar', {
+                method: 'PATCH',
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    // Do NOT set Content-Type! The browser will set it for FormData.
+                },
+                body: formData
+            });
+        }
+
         fetch('/api/doctors/me', {
             method: 'PUT',
             headers: {

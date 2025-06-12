@@ -1,4 +1,5 @@
 import User from '../../db/users.js';
+import formidable from 'formidable';
 
 const client_ID = "99edec02c798ed5"
 const imgur_api = "https://api.imgur.com/3/image"
@@ -50,9 +51,16 @@ const updateMyUserProfile = async (req, res) => {
 
 export const saveUserPicture = async (req, res) => {
     try {
+        console.log(req);
+        var formdata = new FormData();
+        formdata.append("image", req.body.image); 
+        formdata.append("type", "base64");
+        formdata.append("title", req.user_uuid);
+        formdata.append("description", req.user_uuid);
+
         const response = await fetch(imgur_api, {
             method: "POST",
-            body: req.body,
+            body: formdata,
             headers: {
                 'Authorization': `Client-ID ${client_ID}` 
             }
@@ -72,6 +80,7 @@ export const saveUserPicture = async (req, res) => {
                 .json({ message: response_json });
         }
     } catch (err) {
+        console.error('Error saving user picture:', err);
         return res
             .status(500)
             .json({ error: err });
