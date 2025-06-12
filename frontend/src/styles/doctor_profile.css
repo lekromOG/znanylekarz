@@ -15,3 +15,137 @@
     justify-content: center;
     align-items: center;
 }
+
+.doctor-profile-information {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.doctor-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.doctor-image-container img {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 200px;
+    height: 200px;
+}
+
+#doctor-profile-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    gap: 20px;
+}
+
+.doctor-profile-data {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+}
+
+.custom-dropdown {
+    width: 60%;
+}
+
+.dropdown-input {
+    width: 100%;
+    height: 40px;
+    padding: 0px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+label {
+    height: 40px;
+    gap: 10px;
+}
+
+#doctor-name {
+    width: 60%;
+    padding: 10px 0px;
+}
+
+.doctor-profile-availability {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-input-label {
+    display: flex;
+    justify-content: space-between;
+}
+
+.form-input-label p {
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.form-input-label select {
+        height: 30px;
+        width: 60%;
+}
+
+.align-center {
+    align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+    #doctor-profile-form {
+        width: 100%;
+        padding: 10px;
+        box-shadow: none;
+    }
+
+    .doctor-profile-information {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .doctor-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .doctor-image-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .doctor-profile-data {
+        width: 80%;
+    }
+
+    .form-input-label p {
+        width: 30%;
+    }
+
+    .form-input-label{
+        align-items: center;;
+    }
+
+    #doctor-name {
+        width: 60%;
+        padding: 10px 0px;
+    }
+}

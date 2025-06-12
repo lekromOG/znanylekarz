@@ -53,6 +53,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    document.querySelectorAll('.custom-dropdown').forEach(dropdown => {
+        const input = dropdown.querySelector('.dropdown-input');
+        const dropdownList = dropdown.querySelector('.dropdown-list');
+        const items = dropdownList.querySelectorAll('.dropdown-item');
+
+        input.addEventListener('focus', (e) => {
+            e.stopPropagation();
+            dropdownList.classList.add('show');
+        });
+
+    items.forEach(item => {
+        // Use mousedown instead of click
+        item.addEventListener('mousedown', function (e) {
+            e.preventDefault(); // Prevent input from refocusing
+            e.stopPropagation(); // Prevent global handler
+            input.value = this.textContent.trim();
+            dropdownList.classList.remove('show');
+            input.blur();
+        });
+    });
+
+        input.addEventListener('input', () => {
+            const filter = input.value.toLowerCase();
+            items.forEach(item => {
+                if (item.textContent.toLowerCase().includes(filter)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    // Only one global click handler, outside the forEach!
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.custom-dropdown .dropdown-list').forEach(list => {
+            if (!list.parentElement.contains(e.target)) {
+                list.classList.remove('show');
+            }
+        });
+    });
+
     document.getElementById('doctor-profile-form').onsubmit = function(e) {
         e.preventDefault();
         const type = document.getElementById('doctor-type').value;

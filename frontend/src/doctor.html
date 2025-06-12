@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Profile</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/shared.css">
     <link rel="stylesheet" href="styles/doctor_profile.css">
 </head>
 <body>
@@ -21,31 +22,84 @@
         </div>
         <div class="doctor-profile-form-container">
             <form id="doctor-profile-form">
-                <label>
-                    Name:
-                    <input type="text" id="doctor-name" name="name">
-                </label>
-                <label>
-                    Specialty:
-                    <input type="text" id="doctor-specialty" name="specialty">
-                </label>
-                <label>
-                    Location:
-                    <input type="text" id="doctor-location" name="location">
-                </label>
-                <label>
-                    Type of Visit:
-                    <select id="doctor-type" name="type">
-                        <option value="in-person">In Person</option>
-                        <option value="online">Online</option>
-                    </select>
-                </label>
-                <label>
-                    Add Available Day:
-                    <input type="date" id="add-available-day">
-                    <button type="button" id="add-day-btn">Add</button>
-                </label>
-                <ul id="available-days-list"></ul>
+                <div class="doctor-profile-information">
+                    <div class="doctor-image-container">
+                        <img src="" alt="tu bedzie zdjecie">
+                    </div>
+                    <div class="doctor-profile-data">
+                        <label class="form-input-label">
+                            <p>Name:</p>
+                            <input type="text" id="doctor-name" name="name" disabled>
+                        </label>
+                        <label class="form-input-label">
+                            <p>Speciality:</p>
+                                <div class="custom-dropdown" id="specialty-dropdown">
+                                <input type="text" class="dropdown-input" id="doctor-specialty" name="specialty" placeholder="Select or type speciality">
+                                <ul class="dropdown-list" id="specialty-dropdown-list">
+                                    <li class="dropdown-item">Family Medicine</li>
+                                    <li class="dropdown-item">Internal Medicine</li>
+                                    <li class="dropdown-item">Pediatrics</li>
+                                    <li class="dropdown-item">Obstetrics and Gynecology</li>
+                                    <li class="dropdown-item">Dermatology</li>
+                                    <li class="dropdown-item">Psychiatry</li>
+                                    <li class="dropdown-item">Neurology</li>
+                                    <li class="dropdown-item">Cardiology</li>
+                                    <li class="dropdown-item">Gastroenterology</li>
+                                    <li class="dropdown-item">Orthopedics</li>
+                                    <li class="dropdown-item">Pulmonology</li>
+                                    <li class="dropdown-item">Nephrology</li>
+                                    <li class="dropdown-item">Endocrinology</li>
+                                    <li class="dropdown-item">Rheumatology</li>
+                                    <li class="dropdown-item">Hematology</li>
+                                    <li class="dropdown-item">Oncology</li>
+                                    <li class="dropdown-item">Urology</li>
+                                    <li class="dropdown-item">Ophthalmology</li>
+                                    <li class="dropdown-item">Plastic Surgery</li>
+                                </ul>
+                            </div>
+                        </label>
+                        <label class="form-input-label">
+                            <p>Location:</p>
+                                <div class="custom-dropdown" id="location-dropdown">
+                                <input type="text" class="dropdown-input" id="doctor-location" name="location" placeholder="Select or type location">
+                                <ul class="dropdown-list" id="location-dropdown-list">
+                                    <li class="dropdown-item">Dolnośląskie</li>
+                                    <li class="dropdown-item">Kujawsko-Pomorskie</li>
+                                    <li class="dropdown-item">Lubelskie</li>
+                                    <li class="dropdown-item">Lubuskie</li>
+                                    <li class="dropdown-item">Łódzkie</li>
+                                    <li class="dropdown-item">Małopolskie</li>
+                                    <li class="dropdown-item">Mazowieckie</li>
+                                    <li class="dropdown-item">Opolskie</li>
+                                    <li class="dropdown-item">Podkarpackie</li>
+                                    <li class="dropdown-item">Podlaskie</li>
+                                    <li class="dropdown-item">Pomorskie</li>
+                                    <li class="dropdown-item">Śląskie</li>
+                                    <li class="dropdown-item">Świętokrzyskie</li>
+                                    <li class="dropdown-item">Warmińsko-Mazurskie</li>
+                                    <li class="dropdown-item">Wielkopolskie</li>
+                                    <li class="dropdown-item">Zachodniopomorskie</li>
+                                </ul>
+                            </div>
+                        </label>
+                        <label class="form-input-label align-center">
+                            <p>Type of visit:</p>
+                            <select id="doctor-type" name="type">
+                                <option value="in-person">In Person</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="doctor-profile-availability">
+                    <h2>Available Days</h2>
+                    <label>
+                        Add Available Day:
+                        <input type="date" id="add-available-day">
+                        <button type="button" id="add-day-btn">Add</button>
+                    </label>
+                    <ul id="available-days-list"></ul>
+                </div>
                 <button type="submit">Save</button>
             </form>
         </div>
@@ -55,8 +109,10 @@
     <script src="scripts/doctor.js"></script>
     <script>
     document.addEventListener('DOMContentLoaded', () => {
-        fetchAndSetNav(document.getElementById('nav-links'));
+        fetchAndSetNav(document.getElementById('nav-links')).then(() => {
+            setupBurgerMenu();
+        });
     });
-</script>
+    </script>
 </body>
 </html>
