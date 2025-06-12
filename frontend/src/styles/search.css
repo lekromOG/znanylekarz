@@ -126,6 +126,28 @@ input[type="date"],
     align-items: center;
 }
 
+.doctor-card-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.doctor-card-image-container {
+    /* width: 40%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.doctor-card-image-container img {
+    width: 100px;
+    height: 100px;
+}
+
+.doctor-card-inner-container {
+    width: 100%;
+}
+
 @media (max-width: 900px) {
     .search-filter {
         max-width: 100%;

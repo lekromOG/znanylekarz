@@ -93,13 +93,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     const doctorDiv = document.createElement('div');
                     doctorDiv.className = 'doctor-card';
                     doctorDiv.innerHTML = `
-                        <div class="doctor-card-header">
-                            <h3>Doctor: ${doctor.name}</h3>
-                            <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
-                        </div>
-                        <div class="doctor-card-body">
-                            <p><strong>Specialty:</strong> ${doctor.specialty}</p>
-                            <p><strong>Location:</strong> ${doctor.location}</p>
+                        <div class="doctor-card-container">
+                            <div class="doctor-card-image-container">
+                                <img src="${doctor.profilePicture} alt="Doctor Image" class="doctor-image">
+                            </div>
+                            <div class="doctor-card-inner-container">
+                                <div class="doctor-card-header">
+                                    <h3>
+                                        Doctor: <a href="/doctorProfile.html?id=${doctor.id}">${doctor.name}</a>
+                                    </h3>
+                                    <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
+                                </div>
+                                <div class="doctor-card-body">
+                                    <p><strong>Specialty:</strong> ${doctor.specialty}</p>
+                                    <p><strong>Location:</strong> ${doctor.location}</p>
+                                </div>
+                            </div>
                         </div>
                     `;
                     resultsDiv.appendChild(doctorDiv);

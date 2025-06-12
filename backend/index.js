@@ -42,6 +42,10 @@ app.get('/logout', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend/src/logout.html'));
 });
 
+app.get('/api/doctors/profile/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend/src/doctorProfile.html'));
+});
+
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
