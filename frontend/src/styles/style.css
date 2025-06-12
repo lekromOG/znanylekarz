@@ -145,6 +145,19 @@ body, p {
     justify-content: center;
 }
 
+#available-days-list button {
+    margin-left: 10px;
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+}
+#available-days-list button:hover {
+    background: #c0392b;
+}
+
   /* Tablet */
 @media (min-width: 481px) {
     h1 {

@@ -1,0 +1,17 @@
+.doctor-profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.doctor-profile-header h1 {
+    padding: 20px;
+}
+
+.doctor-profile-form-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

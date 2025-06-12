@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Profile</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/doctor_profile.css">
 </head>
 <body>
     <header>
@@ -15,35 +16,39 @@
         </nav>
     </header>
     <main>
-        <h1>Doctor Profile</h1>
-        <form id="doctor-profile-form">
-            <label>
-                Name:
-                <input type="text" id="doctor-name" name="name">
-            </label>
-            <label>
-                Specialty:
-                <input type="text" id="doctor-specialty" name="specialty">
-            </label>
-            <label>
-                Location:
-                <input type="text" id="doctor-location" name="location">
-            </label>
-            <label>
-                Type of Visit:
-                <select id="doctor-type" name="type">
-                    <option value="in-person">In Person</option>
-                    <option value="online">Online</option>
-                </select>
-            </label>
-            <label>
-                Add Available Day:
-                <input type="date" id="add-available-day">
-                <button type="button" id="add-day-btn">Add</button>
-            </label>
-            <ul id="available-days-list"></ul>
-            <button type="submit">Save</button>
-        </form>
+        <div class="doctor-profile-header">
+            <h1>Welcome, Dr. !</h1>
+        </div>
+        <div class="doctor-profile-form-container">
+            <form id="doctor-profile-form">
+                <label>
+                    Name:
+                    <input type="text" id="doctor-name" name="name">
+                </label>
+                <label>
+                    Specialty:
+                    <input type="text" id="doctor-specialty" name="specialty">
+                </label>
+                <label>
+                    Location:
+                    <input type="text" id="doctor-location" name="location">
+                </label>
+                <label>
+                    Type of Visit:
+                    <select id="doctor-type" name="type">
+                        <option value="in-person">In Person</option>
+                        <option value="online">Online</option>
+                    </select>
+                </label>
+                <label>
+                    Add Available Day:
+                    <input type="date" id="add-available-day">
+                    <button type="button" id="add-day-btn">Add</button>
+                </label>
+                <ul id="available-days-list"></ul>
+                <button type="submit">Save</button>
+            </form>
+        </div>
         <div id="profile-message"></div>
     </main>
     <script src="scripts/utils.js"></script>

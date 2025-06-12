@@ -28,9 +28,21 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderAvailableDays() {
         const ul = document.getElementById('available-days-list');
         ul.innerHTML = '';
-        availableDays.forEach(day => {
+        availableDays.forEach((day, idx) => {
             const li = document.createElement('li');
             li.textContent = day;
+
+            // Create a remove button
+            const removeBtn = document.createElement('button');
+            removeBtn.textContent = 'Remove';
+            removeBtn.type = 'button';
+            removeBtn.style.marginLeft = '10px';
+            removeBtn.onclick = function() {
+                availableDays.splice(idx, 1);
+                renderAvailableDays();
+            };
+
+            li.appendChild(removeBtn);
             ul.appendChild(li);
         });
     }

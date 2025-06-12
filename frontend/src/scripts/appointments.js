@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     .then(data => {
         const listDiv = document.getElementById('appointments-list');
         if (!data.length) {
-            listDiv.innerHTML = '<p>No active appointments.</p>';
+            listDiv.innerHTML = '<p class="no-appointments">No active appointments.</p>';
             return;
         }
         const ul = document.createElement('ul');
