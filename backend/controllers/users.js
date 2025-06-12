@@ -1,5 +1,8 @@
 import User from '../../db/users.js';
 
+const client_ID = "99edec02c798ed5"
+const imgur_api = "https://api.imgur.com/3/image"
+
 const getUsers = async (req, res) => {
     try {
         const allUsers = await User.find(); 
@@ -42,6 +45,36 @@ const updateMyUserProfile = async (req, res) => {
         res.json(user);
     } catch (err) {
         res.status(500).json({ error: 'Failed to update user profile' });
+    }
+};
+
+export const saveUserPicture = async (req, res) => {
+    try {
+        const response = await fetch(imgur_api, {
+            method: "POST",
+            body: req.body,
+            headers: {
+                'Authorization': `Client-ID ${client_ID}` 
+            }
+        });
+        const response_json = await response.json();
+        if (response.ok) {
+            User.findByIdAndUpdate(
+                req.user_uuid,
+                { profilePicture: response_json.data.link }
+            );
+            return res
+                .status(201)
+                .json({ message: response_json.data.link });
+        } else {
+            return res
+                .status(400)
+                .json({ message: response_json });
+        }
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: err });
     }
 };
 
