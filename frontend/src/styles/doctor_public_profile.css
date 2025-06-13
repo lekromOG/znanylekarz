@@ -12,7 +12,6 @@ main {
 }
 
 .doctor-card-container {
-    min-width: 375px;
     padding: 20px;
     border-radius: 15px;
     background-color: white;
@@ -79,6 +78,11 @@ main {
     border: none;
     cursor: pointer;
     width: 200px;
+    transition: background-color 0.2s ease;
+}
+
+.submit-button:hover {
+    background-color: #4a7a8f;
 }
 
 .submit-wrapper {
@@ -93,14 +97,46 @@ main {
     justify-content: space-between;
     width: 100%;
     padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.submit-review-container {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.review-grade-container {
+    display: flex;
+    gap: 10px;
+}
+
+.rating-btn {
+    padding: 10px;
+    background-color: #5a89af;
+    border: none;
+    color: white;
+    border-radius: 2px;
+    min-width: 40px;
+    transition: background-color 0.2s ease;
+    cursor: pointer;
+}
+
+.rating-btn:hover {
+    background-color: #4a7a8f;
+}
+
+.review-item {
+    padding: 10px;
 }
 
 @media screen and (max-width: 425px) { 
     .doctor-card-container {
         width: 100%;
-        padding: 10px;
-        background-color: #f3f3f3;
+        background-color: white;
         box-shadow: none;
+        padding: 0px;
     }
 
     .doctor-card-inner-container {
@@ -116,5 +152,15 @@ main {
 
     .doctor-card-text-container {
         width: 100%;
+    }
+
+    main {
+        background-color: white;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .doctor-card-container {
+        min-width: 375px;
     }
 }

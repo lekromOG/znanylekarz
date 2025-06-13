@@ -50,14 +50,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     <hr>
                     <div class="write-review-container">
                         <h4>Had an appointment? Don't forget to leave a review!</h4>
-                        <textarea placeholder="Write your review" style="height: 80px; resize: vertical;"></textarea>
-                        <button id="submit-review-btn" class="submit-button">Submit</button>
+                        <textarea id="review-text" placeholder="Write your review" style="height: 80px; resize: vertical;"></textarea>
+                        <div class="submit-review-container">
+                            <button id="submit-review-btn" class="submit-button">Submit</button>
+                            <div class="review-grade-container">
+                                <button type="button" class="rating-btn" data-rating="1">1</button>
+                                <button type="button" class="rating-btn" data-rating="2">2</button>
+                                <button type="button" class="rating-btn" data-rating="3">3</button>
+                                <button type="button" class="rating-btn" data-rating="4">4</button>
+                                <button type="button" class="rating-btn" data-rating="5">5</button>
+                            </div>
+                        </div>
                         </div>
                         <hr>
                         <div class="reviews-container">
                             <div class="reviews-header">
-                                <h4>Review Count: (0)</h4>
-                                <h5 id="review-count">Average Rating: (0)</h5>
+                                <h4>Review Count: (${doctor.opinionsCount})</h4>
+                                <h5 id="review-count">Average Rating: (${doctor.rating})</h5>
                             </div>
                             <div id="reviews-list"></div>
                         </div>   
@@ -126,5 +135,61 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+            let selectedRating = 0;
+
+            document.querySelectorAll('.rating-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectedRating = parseInt(this.getAttribute('data-rating'));
+                    // Optional: visually highlight selected stars
+                    document.querySelectorAll('.rating-btn').forEach(star => {
+                        star.style.color = parseInt(star.getAttribute('data-rating')) <= selectedRating ? '#FFD700' : '#ccc';
+                    });
+                });
+            });
+
+            
+            const submitReviewBtn = document.getElementById('submit-review-btn');
+            const reviewTextArea = document.getElementById('review-text');
+
+            submitReviewBtn.addEventListener('click', () => {
+                const content = reviewTextArea.value.trim();
+                if (!content) {
+                    alert('Please write a review before submitting.');
+                    return;
+                }
+
+                fetch(`/api/doctors/profile/${doctorId}/opinions`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + localStorage.getItem('token')
+                    },
+                    body: JSON.stringify({ rating: selectedRating, content: content })
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        alert('Review submitted!');
+                        // Optionally: reload the doctor profile or append the new review to the list
+                        location.reload();
+                    }
+                });
+            });
+
+
+
+
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = doctor.opinions.map(opinion => `
+            <div class="review-item" style="display: flex; align-items: flex-start; margin-bottom: 16px;">
+                <img src="${opinion.user?.profilePicture || '/img/default-user.png'}" alt="User photo" style="width:48px; height:48px; border-radius:50%; object-fit:cover; margin-right:12px;">
+                <div>
+                <h4 style="margin:0 0 4px 0;">${opinion.user?.name || 'Anonymous'}</h4>
+                <p style="margin:0;">${opinion.content}</p>
+                </div>
+            </div>
+            `).join('');
         });
 });
