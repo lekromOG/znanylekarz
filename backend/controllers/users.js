@@ -51,13 +51,13 @@ const updateMyUserProfile = async (req, res) => {
 
 export const saveUserPicture = async (req, res) => {
     const form = formidable({ multiples: false });
-    form.parse(req, async (err, fields, files) => {
+    form.parse(req, async (err, fields) => {
         if (err) return res.status(400).json({ error: 'Form parse error' });
         const base64Image = fields.image;
         if (!base64Image) return res.status(400).json({ error: 'No image provided' });
 
         try {
-            const formdata = new URLSearchParams();
+            const formdata = new FormData();
             formdata.append("image", base64Image);
             formdata.append("type", "base64");
             formdata.append("title", req.user_uuid);
