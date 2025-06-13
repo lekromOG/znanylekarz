@@ -26,11 +26,12 @@ const authenticateToken = async (req, res, next) => {
 
 const authorizeAdmin = async (req, res, next) => {
     try {
-        const checkAdmin = User.findById(req.user_uuid);
+        const checkAdmin = await User.findById(req.user_uuid);
         if (checkAdmin.role === "admin") {
             next();
         } else return res.status(403).json({ error: "Unauthorized" })
     } catch (err) {
+        console.log(err);
         return res.status(500).json({ error: "CheckPermission error" })
     }
 }
