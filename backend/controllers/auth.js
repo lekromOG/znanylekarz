@@ -3,6 +3,12 @@ import jwt from 'jsonwebtoken';
 import Doctor from '../../db/doctors.js';
 import users from '../../db/users.js';
 import * as fs from 'node:fs';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
+
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = dirname(_filename);
 
 const login = async (req, res) => {
     try {
@@ -13,7 +19,7 @@ const login = async (req, res) => {
             const isPasswordOk = await bcrypt.compare(password, user.password);
             if (isPasswordOk) {
                 try {
-                    var privateKey = fs.readFileSync('./backend/keys/privkey.pem', 'utf8');
+                    var privateKey = fs.readFileSync(path.join(_dirname, '../keys/privkey.pem'), 'utf8');
                     var token = jwt.sign({sub: user._id }, privateKey, { algorithm: 'RS256', expiresIn: "1h"});
                     res.set('Authorization', `Bearer ${token}`);
                     return res
