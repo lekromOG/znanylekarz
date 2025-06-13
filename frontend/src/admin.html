@@ -2,27 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Znany Lekarz</title>
     <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/shared.css">
+    <link rel="stylesheet" href="styles/admin.css">
 </head>
 <body>
     <header>
         <nav class="navigation-bar">
             <div class="logo"><img src="../img/gooddoctor.png" alt="gooddoctor" class="logo"></div>
+            <button class="phone-menu-toggle" id="burger-menu">☰</button>
             <ul class="nav-links" id="nav-links"></ul>
         </nav>
     </header>
-    <main>
+    <main class="admin-panel">
         <h1>Admin Panel</h1>
-        <section>
-            <h2>Users</h2>
-            <div id="users-list"></div>
-        </section>
-        <section>
-            <h2>Doctors</h2>
-            <div id="doctors-list"></div>
-        </section>
+        <div class="admin-panel-content">
+            <div class="admin-panel-section teal">
+                <h2 class="admin-heading">Users</h2>
+                <div id="users-list" class="admin-list"></div>
+            </div>
+            <div class="admin-panel-section pastel-green">
+                <h2 class="admin-heading">Doctors</h2>
+                <div id="doctors-list" class="admin-list"></div>
+            </div>
+        </div>
     </main>
+    <footer class="site-footer">
+        <p>&copy; 2025 Good Doctor</p>
+        <p>Authors: Szymon Franz, Kacper Klimas, Adam Trzpis</p>
+    </footer>
     <script src="scripts/utils.js"></script>
     <script src="scripts/admin.js"></script>
 </body>

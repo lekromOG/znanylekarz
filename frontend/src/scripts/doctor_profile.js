@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-
     fetchAndSetNav(document.getElementById('nav-links')).then(() => {
         const burgerMenu = document.getElementById('burger-menu');
         const navLinks = document.getElementById('nav-links');
@@ -15,5 +14,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
 });
