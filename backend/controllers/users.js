@@ -1,4 +1,7 @@
 import User from '../../db/users.js';
+import Doctor from '../../db/doctors.js';
+import Opinion from '../../db/opinions.js';
+import Appointment from '../../db/appointments.js';
 import formidable from 'formidable';
 import mongoose from 'mongoose';
 
@@ -43,6 +46,7 @@ const deleteUser = async (req, res) => {
         .status(200)
         .json({ message: 'User and related data deleted' });
   } catch (err) {
+    console.log(err);
     await session.abortTransaction();
     session.endSession();
     return res

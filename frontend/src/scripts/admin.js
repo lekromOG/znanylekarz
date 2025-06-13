@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .then(res => {
                     if (res.ok) {
-                        // Optionally remove the card from the DOM:
                         e.target.closest('.admin-card').remove();
                     } else {
                         alert('Failed to delete user.');
