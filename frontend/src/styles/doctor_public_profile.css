@@ -1,0 +1,120 @@
+main {
+    background-color: #f3f3f3;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding-top: 20px;
+}
+
+.doctor-card-container {
+    min-width: 375px;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.doctor-card-inner-container {
+    display: flex;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.doctor-card-image-container img {
+    width: 200px;
+    height: 200px;
+    border: 1px solid #ccc;
+}
+
+.doctor-card-text-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.doctor-card-header-text {
+    display: flex;
+    gap: 10px;
+}
+
+.doctor-card-header-text a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.doctor-card-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.doctor-card-header h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.write-review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.write-review-container input {
+    display: flex;
+    height: 200px;
+}
+
+.submit-button {
+    background-color: #5a89af;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+}
+
+.submit-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.reviews-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-top: 20px;
+}
+
+@media screen and (max-width: 425px) { 
+    .doctor-card-container {
+        width: 100%;
+        padding: 10px;
+        background-color: #f3f3f3;
+        box-shadow: none;
+    }
+
+    .doctor-card-inner-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .doctor-card-image-container img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .doctor-card-text-container {
+        width: 100%;
+    }
+}

@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
                                     <p><strong>Rating:</strong> ${doctor.rating ?? 'N/A'}</p>
                                 </div>
                                 <div class="doctor-card-body">
-                                    <p><strong>Specialty:</strong> ${doctor.specialty}</p>
-                                    <p><strong>Location:</strong> ${doctor.location}</p>
+                                    <p>Specialty: ${doctor.specialty}</p>
+                                    <p>Location: ${doctor.location}</p>
                                 </div>
                             </div>
                         </div>
