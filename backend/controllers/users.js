@@ -1,5 +1,6 @@
 import User from '../../db/users.js';
 import formidable from 'formidable';
+import mongoose from 'mongoose';
 
 const client_ID = "99edec02c798ed5"
 const imgur_api = "https://api.imgur.com/3/image"
@@ -16,12 +17,38 @@ const getUsers = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-    try {
-        await User.findByIdAndDelete(req.params.id);
-        res.sendStatus(204);
-    } catch (err) {
-        res.status(500).json({ error: 'Failed to delete user' });
+  const session = await mongoose.startSession();
+  session.startTransaction();
+  try {
+    const user = await User.findById(req.params.id).session(session);
+    if (!user) {
+      await session.abortTransaction();
+      session.endSession();
+      return res.status(404).json({ message: 'User not found' });
     }
+
+    await User.findByIdAndDelete(user._id).session(session);
+
+    if (user.role === 'doctor') {
+      await Doctor.findOneAndDelete({ user_id: user._id }).session(session);
+    }
+
+    await Opinion.deleteMany({ user_id: user._id }).session(session);
+    await Appointment.deleteMany({ userId: user._id }).session(session);
+
+    await session.commitTransaction();
+    session.endSession();
+
+    return res
+        .status(200)
+        .json({ message: 'User and related data deleted' });
+  } catch (err) {
+    await session.abortTransaction();
+    session.endSession();
+    return res
+        .status(500)
+        .json({ error: err.message });
+  }
 };
 
 const getMyUserProfile = async (req, res) => {
