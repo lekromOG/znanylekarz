@@ -1,3 +1,7 @@
+body {
+    background-color: #f3f3f3;
+}
+
 .user-heading {
     display: flex;
     width: 100%;
@@ -22,6 +26,7 @@
     border: 1px solid #ccc;
     border-radius: 10px;
     gap: 20px;
+    background-color: white;
 }
 
 #user-profile-view button {
@@ -89,6 +94,7 @@ label input {
     border: 1px solid #ccc;
     border-radius: 10px;
     gap: 20px;
+    background-color: white;
 }
 
 .form-buttons button {
