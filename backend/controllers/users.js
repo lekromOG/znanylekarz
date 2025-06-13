@@ -122,14 +122,19 @@ export const saveUserPicture = async (req, res) => {
 
 const addtoFavourites = async (req, res) => {
     try {
-        await Favourite.findOneAndUpdate({ 
-            user_id: req.user_uuid,
-            $addToSet: { doctor_ids: req.body.doctorId },
-            upsert: true, new: true });
-        return res
-            .status(201)
-            .json({ message: 'Added to favourites succesfully' });
+        const doctorId = req.body.doctorId;
+        await Favourite.findOneAndUpdate(
+            { user_id: req.user_uuid },
+            { $addToSet: { doctor_ids: doctorId } },
+            { upsert: true, new: true }
+        );
+        const updated = await Favourite.findOne({ user_id: req.user_uuid });
+        return res.status(201).json({
+            message: 'Added to favourites successfully',
+            doctor_ids: updated.doctor_ids
+        });
     } catch (err) {
+        console.error('Error in adding to favourites:', err);
         return res
             .status(500)
             .json({ error: 'Error in adding to favourites' });
@@ -138,10 +143,11 @@ const addtoFavourites = async (req, res) => {
 
 const removeFromFavourites = async (req, res) => {
     try {
-        await Favourite.findOneAndUpdate({ 
-            user_id: req.user_uuid,
-            $pull: { doctor_ids: req.body.doctorId },
-            new: true });
+        await Favourite.findOneAndUpdate(
+            { user_id: req.user_uuid }, // filter
+            { $pull: { doctor_ids: req.body.doctorId } }, // update
+            { new: true } // options
+        );
         return res
             .status(204)
             .json({ message: 'Removed from favourites succesfully' });
@@ -154,16 +160,18 @@ const removeFromFavourites = async (req, res) => {
 
 const listUserFavourites = async (req, res) => {
     try {
-        const favourites = await Favourite
-            .findOne({ user_id: req.user_uuid })
-            .populate('doctor_ids', 'name lastname profilePicture');
-        return res
-            .status(200)
-            .json(favouriteDoctorDTO(favourites));    
+        const favourites = await Favourite.findOne({ user_id: req.user_uuid }).populate('doctor_ids');
+        if (!favourites) {
+            return res.json({ doctors: [] });
+        }
+        const doctors = favourites.doctor_ids
+            .filter(doctor => doctor) 
+            .map(favouriteDoctorDTO);
+
+        return res.json({ doctors });
     } catch (err) {
-        return res
-            .status(500)
-            .json({ error: 'Error in listing favourites' });
+        console.error('Error in listing favourites:', err);
+        return res.status(500).json({ error: 'Error in listing favourites' });
     }
 };
 

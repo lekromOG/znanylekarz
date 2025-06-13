@@ -65,25 +65,66 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
 
+            let isFavorited = false;
+
             const favoriteBtn = document.getElementById('favorite-btn');
             const favoriteStar = document.getElementById('favorite-star');
+
+            fetch('/api/users/me/favourites', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('token')
+                }
+            })
+            .then(res => res.json())
+            .then(favourites => {
+                const isFavorited = favourites.doctors.some(doc => doc.id === doctorId);
+                if (isFavorited) {
+                    favoriteStar.style.color = '#FFD700';
+                    favoriteStar.innerHTML = '&#9733;';
+                } else {
+                    favoriteStar.style.color = '#ccc';
+                    favoriteStar.innerHTML = '&#9734;';
+                }
+            });
+
             favoriteBtn.addEventListener('click', () => {
-                fetch('/api/users/me/favorites', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    },
-                    body: JSON.stringify({ doctorId: doctor.id })
-                })
-                .then(res => {
-                    if (res.ok) {
-                        favoriteStar.style.color = '#FFD700'; 
-                        favoriteStar.innerHTML = '&#9733;'; 
-                    } else {
-                        alert('Failed to add to favorites.');
-                    }
-                });
+                if (isFavorited) {
+                    fetch('/api/users/me/favourites', {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({ doctorId: doctorId })
+                    })
+                    .then(res => {
+                        if (res.ok) {
+                            isFavorited = false;
+                            favoriteStar.style.color = '#ccc';
+                            favoriteStar.innerHTML = '&#9734;';
+                        } else {
+                            alert('Failed to remove from favorites.');
+                        }
+                    });
+                } else {
+                    fetch('/api/users/me/favourites', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({ doctorId: doctorId })
+                    })
+                    .then(res => {
+                        if (res.ok) {
+                            isFavorited = true;
+                            favoriteStar.style.color = '#FFD700';
+                            favoriteStar.innerHTML = '&#9733;';
+                        } else {
+                            alert('Failed to add to favorites.');
+                        }
+                    });
+                }
             });
         });
 });
