@@ -3,6 +3,9 @@ const burgerMenu = document.getElementById('burger-menu');
 const navLinks = document.querySelector('.nav-links'); 
 const searchFilter = document.getElementById('search-filter');
 
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('date-input').value = today;
+
 burgerMenu.addEventListener('click', () => {
     navLinks.classList.toggle('phone-nav-active');
 });

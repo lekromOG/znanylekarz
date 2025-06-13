@@ -124,6 +124,7 @@ input[type="date"],
     gap: 10px;
     justify-content: center;
     align-items: center;
+    padding-bottom: 10px;
 }
 
 .doctor-card-container {
@@ -146,7 +147,10 @@ input[type="date"],
 
 .doctor-card-inner-container {
     width: 100%;
+    padding-top: 10px;
 }
+
+
 
 @media (max-width: 900px) {
     .search-filter {

@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <div class="doctor-card-header">
                                 <div class="doctor-card-header-text">
                                     <h3>Doctor:</h3>
-                                    <a href="/doctorProfile.html?id=${doctor.id}">${doctor.name}</a>
+                                    <p class="doctor-card-profile-name">${doctor.name}</p>
                                 </div>
                                 <button id="favorite-btn" title="Add to favorites" style="background:none;border:none;cursor:pointer;font-size:1.5rem;">
                                     <span id="favorite-star" style="color: #ccc;">&#9734;</span>
