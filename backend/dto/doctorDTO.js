@@ -28,3 +28,10 @@ export const doctorProfileDTO = (doctor, opinions) => ({
     }
   }))
 });
+
+export const favouriteDoctorDTO = (doctor) => ({
+  id:               doctor._id.toString(),
+  name:             doctor.name,
+  specialty:        doctor.specialty,
+  profilePicture:   doctor.profilePicture,
+});

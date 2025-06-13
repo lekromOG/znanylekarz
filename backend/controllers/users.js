@@ -2,8 +2,10 @@ import User from '../../db/users.js';
 import Doctor from '../../db/doctors.js';
 import Opinion from '../../db/opinions.js';
 import Appointment from '../../db/appointments.js';
+import Favourite from '../../db/favourites.js';
 import formidable from 'formidable';
 import mongoose from 'mongoose';
+import { favouriteDoctorDTO } from '../dto/doctorDTO.js';
 
 const client_ID = "99edec02c798ed5"
 const imgur_api = "https://api.imgur.com/3/image"
@@ -118,6 +120,59 @@ export const saveUserPicture = async (req, res) => {
     });
 };
 
+const addtoFavourites = async (req, res) => {
+    try {
+        await Favourite.findOneAndUpdate({ 
+            user_id: req.user_uuid,
+            $addToSet: { doctor_ids: req.body.doctorId },
+            upsert: true, new: true });
+        return res
+            .status(201)
+            .json({ message: 'Added to favourites succesfully' });
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: 'Error in adding to favourites' });
+    }
+};
+
+const removeFromFavourites = async (req, res) => {
+    try {
+        await Favourite.findOneAndUpdate({ 
+            user_id: req.user_uuid,
+            $pull: { doctor_ids: req.body.doctorId },
+            new: true });
+        return res
+            .status(204)
+            .json({ message: 'Removed from favourites succesfully' });
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: 'Error in removing from favourites' });
+    }
+};
+
+const listUserFavourites = async (req, res) => {
+    try {
+        const favourites = await Favourite
+            .findOne({ user_id: req.user_uuid })
+            .populate('doctor_ids', 'name lastname profilePicture');
+        return res
+            .status(200)
+            .json(favouriteDoctorDTO(favourites));    
+    } catch (err) {
+        return res
+            .status(500)
+            .json({ error: 'Error in listing favourites' });
+    }
+};
+
 export {
-    getUsers, deleteUser, updateMyUserProfile, getMyUserProfile
+    getUsers, 
+    deleteUser, 
+    updateMyUserProfile, 
+    getMyUserProfile,
+    addtoFavourites,
+    removeFromFavourites,
+    listUserFavourites
 }
