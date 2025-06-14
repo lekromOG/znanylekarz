@@ -7,4 +7,5 @@ const favouriteSchema = new Schema({
   doctor_ids: [{ type: ObjectId, ref: 'Doctor' }]
 });
 
-export default model('Favourite', favouriteSchema);
+const Favourite = model('Favourite', favouriteSchema);
+export default Favourite;
