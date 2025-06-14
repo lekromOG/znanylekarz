@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
     
     let userData = {};
 
-    // Fetch user profile
     fetch('/api/users/me', {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')

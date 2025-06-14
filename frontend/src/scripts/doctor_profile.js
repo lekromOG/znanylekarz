@@ -140,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.rating-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
                     selectedRating = parseInt(this.getAttribute('data-rating'));
-                    // Optional: visually highlight selected stars
                     document.querySelectorAll('.rating-btn').forEach(star => {
                         star.style.color = parseInt(star.getAttribute('data-rating')) <= selectedRating ? '#FFD700' : '#ccc';
                     });
@@ -172,7 +171,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert(data.error);
                     } else {
                         alert('Review submitted!');
-                        // Optionally: reload the doctor profile or append the new review to the list
                         location.reload();
                     }
                 });

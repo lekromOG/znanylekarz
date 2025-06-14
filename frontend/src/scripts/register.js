@@ -104,7 +104,7 @@ registerForm.addEventListener('submit', async (e) => {
             const data = await response.json();
             message.style.display = 'block';
             message.textContent = 'Registration successful!';
-            message.style.color = 'green';
+            message.style.color = 'white';
             console.log('Registered user:', data);
         } else {
             const error = await response.json();

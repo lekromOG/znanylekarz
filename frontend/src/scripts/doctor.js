@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             li.textContent = day;
 
-            // Create a remove button
             const removeBtn = document.createElement('button');
             removeBtn.textContent = 'Remove';
             removeBtn.type = 'button';
@@ -64,10 +63,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
     items.forEach(item => {
-        // Use mousedown instead of click
         item.addEventListener('mousedown', function (e) {
-            e.preventDefault(); // Prevent input from refocusing
-            e.stopPropagation(); // Prevent global handler
+            e.preventDefault(); 
+            e.stopPropagation(); 
             input.value = this.textContent.trim();
             dropdownList.classList.remove('show');
             input.blur();
@@ -86,7 +84,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Only one global click handler, outside the forEach!
     document.addEventListener('click', (e) => {
         document.querySelectorAll('.custom-dropdown .dropdown-list').forEach(list => {
             if (!list.parentElement.contains(e.target)) {
@@ -100,13 +97,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('doctor-image-input').addEventListener('change', function(event) {
             const file = event.target.files[0];
             if (!file) return;
-            if (file.size > 20 * 1024 * 1024) { // 2MB limit
+            if (file.size > 20 * 1024 * 1024) { 
                 alert('Image is too large! Please select an image under 2MB.');
                 return;
             }
         const reader = new FileReader();
         reader.onload = function(e) {
-            doctorImageBase64 = e.target.result; // base64 string with data:image/... prefix
+            doctorImageBase64 = e.target.result; 
             document.getElementById('doctor-image-preview').src = doctorImageBase64;
         };
         reader.readAsDataURL(file);
@@ -127,14 +124,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('doctor-profile-form').onsubmit = function(e) {
         e.preventDefault();
         const type = document.getElementById('doctor-type').value;
-        const online = type === 'online'; // true if online, false if in-person
+        const online = type === 'online'; 
 
         const data = {
             name: document.getElementById('doctor-name').value,
             specialty: document.getElementById('doctor-specialty').value,
             location: document.getElementById('doctor-location').value,
             availableDays: availableDays,
-            online, // <-- send this to backend
+            online, 
         };
 
         if (doctorImageBase64) {
@@ -146,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 method: 'PATCH',
                 headers: {
                     'Authorization': 'Bearer ' + localStorage.getItem('token')
-                    // Do NOT set Content-Type! The browser will set it for FormData.
                 },
                 body: formData
             });

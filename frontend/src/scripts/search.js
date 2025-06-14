@@ -24,7 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const inPersonButton = document.getElementById('in-person');
     const locationSearch = document.getElementById('voivodeship-dropdown');
 
-    // Restore the selected appointment type
     const savedType = localStorage.getItem('appointmentType');
     if (savedType === 'online') {
         onlineButton.classList.add('button-active');

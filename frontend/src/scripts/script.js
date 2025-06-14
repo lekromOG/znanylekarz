@@ -72,7 +72,6 @@ searchButton.addEventListener('click', () => {
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.custom-dropdown');
 
-    // Restore the selected appointment type
     const savedType = localStorage.getItem('appointmentType');
     if (savedType === 'online') {
         onlineButton.classList.add('button-active');

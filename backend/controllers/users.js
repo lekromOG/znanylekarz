@@ -145,9 +145,9 @@ const addtoFavourites = async (req, res) => {
 const removeFromFavourites = async (req, res) => {
     try {
         await Favourite.findOneAndUpdate(
-            { user_id: req.user_uuid }, // filter
-            { $pull: { doctor_ids: req.body.doctorId } }, // update
-            { new: true } // options
+            { user_id: req.user_uuid }, 
+            { $pull: { doctor_ids: req.body.doctorId } }, 
+            { new: true } 
         );
         return res
             .status(204)
