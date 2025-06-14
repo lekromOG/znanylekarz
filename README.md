@@ -12,6 +12,9 @@ This project demonstrates a full-stack approach with a Node.js/Express backend a
 - **Responsive Design:** Works on desktop and mobile devices.
 - **User Authentication:** Role-based navigation for patients, doctors, and admins.
 - **Filtering:** Apply filters to search results.
+- **Doctor Reviews:** Patients can leave reviews and ratings for doctors.
+- **Favorites Management:** Users can add doctors to their favorites list.
+- **Admin Panel:** Manage users and doctors with an admin interface.
 - **Modern UI:** Built with custom CSS and Bootstrap.
 - **Mock Data Generation:** Easily generate mock users for development.
 
@@ -23,54 +26,64 @@ This project demonstrates a full-stack approach with a Node.js/Express backend a
 znanylekarz/
 │
 ├── backend/
-│   ├── index.js
-│   ├── controllers/
-│   │   ├── auth.js
-│   │   ├── doctors.js
-│   │   └── users.js
-│   ├── keys/
-│   │   ├── privkey.pem
-│   │   └── pubkey.pem
-│   ├── middlewares/
-│   │   └── jwt.js
-│   └── routers/
-│       ├── auth.js
-│       ├── doctors.js
-│       └── users.js
-│
-├── db/
-│   ├── doctors.js
-│   ├── reviews.js
-│   ├── users.js
-│   └── scripts/
-│       ├── generate_mock_data.py
-│       └── requirements.txt
+│   ├── index.js                # Main backend entry point
+│   ├── controllers/            # Backend controllers
+│   │   ├── auth.js             # Authentication logic
+│   │   ├── doctors.js          # Doctor-related logic
+│   │   └── users.js            # User-related logic
+│   ├── dto/                    # Data Transfer Objects
+│   │   ├── doctorDTO.js        # Doctor DTOs
+│   ├── db/                     # Database schemas
+│   │   ├── doctors.js          # Doctor schema
+│   │   ├── favourites.js       # Favorites schema
+│   │   ├── opinions.js         # Opinions schema
+│   │   ├── users.js            # User schema
+│   │   └── scripts/            # Utility scripts
+│   │       ├── generate_mock_data.py # Mock data generator
+│   │       └── requirements.txt # Python dependencies
+│   ├── middlewares/            # Middleware logic
+│   │   └── jwt.js              # JWT authentication middleware
+│   └── routers/                # API routes
+│       ├── auth.js             # Authentication routes
+│       ├── doctors.js          # Doctor routes
+│       ├── users.js            # User routes
+│       └── appointments.js     # Appointment routes
 │
 ├── frontend/
-│   ├── img/
-│   │   ├── gooddoctor.png
-│   │   └── ...
-│   └── src/
-│       ├── index.html
-│       ├── search.html
-│       ├── register.html
-│       ├── doctor.html
-│       ├── scripts/
-│       │   ├── script.js
-│       │   ├── search.js
-│       │   └── utils.js
-│       └── styles/
-│           ├── style.css
-│           ├── search.css
-│           ├── shared.css
-│           └── reset.css
+│   ├── img/                    # Images
+│   │   ├── gooddoctor.png      # Logo
+│   ├── src/                    # Frontend source files
+│   │   ├── index.html          # Homepage
+│   │   ├── search.html         # Search page
+│   │   ├── register.html       # Registration page
+│   │   ├── doctor.html         # Doctor profile page
+│   │   ├── appointments.html   # Appointments page
+│   │   ├── admin.html          # Admin panel
+│   │   ├── scripts/            # JavaScript files
+│   │   │   ├── script.js       # General scripts
+│   │   │   ├── utils.js        # Utility functions
+│   │   │   ├── doctor_profile.js # Doctor profile logic
+│   │   │   ├── admin.js        # Admin panel logic
+│   │   ├── styles/             # CSS files
+│   │   │   ├── style.css       # General styles
+│   │   │   ├── shared.css      # Shared styles
+│   │   │   ├── reset.css       # CSS reset
+│   │   │   └── doctor.css      # Doctor-specific styles
 │
-└── README.md
+└── README.md                   # Project documentation
 ```
 
 ---
 
 ## Getting Started
+
+### Prerequisites
+
+- **Node.js** (v16 or higher)
+- **MongoDB** (local or cloud instance)
+- **Python** (for mock data generation)
+
+### Installation
 
 1. **Clone the repository:**
    ```sh
@@ -96,11 +109,11 @@ znanylekarz/
 
 ## Usage
 
-- Use the search tool on the homepage to find doctors.
-- Filter results by specialty, location, and date.
-- Switch between in-person and online appointments.
-- Sign in or register for personalized features.
-- Admins and doctors have access to additional navigation options.
+- **Search Doctors:** Use the search tool on the homepage to find doctors by specialty, location, and availability.
+- **Book Appointments:** Choose between in-person and online appointments.
+- **Leave Reviews:** Share your experience by leaving reviews and ratings for doctors.
+- **Manage Favorites:** Add or remove doctors from your favorites list.
+- **Admin Features:** Admins can manage users and doctors via the admin panel.
 
 ---
 
@@ -114,9 +127,9 @@ znanylekarz/
 
 ## Customization
 
-- Update specialties and filters in the HTML or via backend.
-- Modify styles in `frontend/src/styles/` as needed.
-- Use `db/scripts/generate_mock_data.py` to generate mock users for development.
+- **Specialties and Filters:** Update specialties and filters in the HTML or via backend.
+- **Styles:** Modify styles in `frontend/src/styles/` as needed.
+- **Mock Data:** Use `db/scripts/generate_mock_data.py` to generate mock users for development.
 
 ---
 
