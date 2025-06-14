@@ -150,7 +150,9 @@ input[type="date"],
     padding-top: 10px;
 }
 
-
+.centered-paragraph {
+    text-align: center;;
+}
 
 @media (max-width: 900px) {
     .search-filter {

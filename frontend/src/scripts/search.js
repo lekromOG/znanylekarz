@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 resultsDiv.innerHTML = '';
 
                 if (!data.length) {
-                    resultsDiv.innerHTML = '<p>No doctors found matching your criteria.</p>';
+                    resultsDiv.innerHTML = '<p class="centered-paragraph">No doctors found matching your criteria.</p>';
                     return;
                 }
 
