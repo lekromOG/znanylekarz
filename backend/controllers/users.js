@@ -40,6 +40,7 @@ const deleteUser = async (req, res) => {
 
     await Opinion.deleteMany({ user_id: user._id }).session(session);
     await Appointment.deleteMany({ userId: user._id }).session(session);
+    await Favourite.deleteMany({ userId: user._id }).session(session);
 
     await session.commitTransaction();
     session.endSession();
