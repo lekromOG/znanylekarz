@@ -129,8 +129,6 @@ body, p {
     border-bottom: 1px solid rgba(0, 0, 0, 0.061);
 }
 
-
-
 .search-tool {
     overflow: visible; 
 }
@@ -142,7 +140,70 @@ body, p {
 .advice-review-container {
     width: 50%;
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    float: left;
+}
+
+.advices-reviews {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+}
+
+.advice-headings {
+    width: 100%;
+    display: flex;
+}
+
+.advice-heading {
+    width: 50%;
+    display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.advice-gap {
+    gap: 60px;
+}
+
+.advice {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.advice-review-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.advice-heading-text-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-heading {
+    display: flex;
+    justify-content: space-between;
+}
+
+.review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.review {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 20px;
 }
 
 #available-days-list button {
@@ -261,13 +322,19 @@ body, p {
         min-width: 750px;
     }
 
-    .advice-review-section {
+    .advice-review-wrapper {
         flex-direction: row;
-        gap: 0px;
+    }
+}
+  
+@media (max-width: 768px) {
+    .advice-review-wrapper {
+        justify-content: center;
+        align-items: center;
     }
 
     .advice-review-container {
         width: 100%;
+        padding: 20px;
     }
 }
-  
