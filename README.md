@@ -135,8 +135,6 @@ znanylekarz/
 
 ## License
 
-MIT
-
----
+This project is licensed under the [MIT License](LICENSE).
 
 *This project is for educational purposes and not affiliated with znanylekarz.pl.*
