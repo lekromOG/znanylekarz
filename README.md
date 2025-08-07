@@ -87,7 +87,7 @@ znanylekarz/
 
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/znanylekarz.git
+   git clone https://github.com/lekromOG/znanylekarz.git
    ```
 
 2. **Install backend dependencies:**
