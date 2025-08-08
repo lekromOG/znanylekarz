@@ -100,7 +100,7 @@ znanylekarz/
    ```sh
    npm start
    ```
-   The backend will be available at [http://localhost:3000](http://localhost:3000).
+   The frontend will be available at [http://localhost:3000](http://localhost:3000).
 
 4. **Open the frontend:**
    - Open `frontend/src/index.html` in your browser.
